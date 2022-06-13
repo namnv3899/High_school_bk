@@ -4,11 +4,10 @@ import { ILike, Repository } from 'typeorm';
 import { Accountant } from './accountant.entity';
 import * as bcrypt from 'bcrypt';
 import {
-  GetOneAccountantdto,
-  AccountantRegisterdto,
-  DeleteAccountantdto,
-  SearchAccountantdto,
-  UpdateAccountantdto,
+  AccountantRegisterDto,
+  DeleteAccountantDto,
+  SearchAccountantDto,
+  UpdateAccountantDto,
 } from './accountant.dto';
 
 @Injectable()
@@ -18,13 +17,13 @@ export class AccountantService {
     private readonly accountantRepository: Repository<Accountant>,
   ) {}
 
-  public async createAccountant(accountantRegisterdto: AccountantRegisterdto) {
+  public async createAccountant(accountantRegisterDto: AccountantRegisterDto) {
     try {
       const accountant = new Accountant();
-      accountant.username = accountantRegisterdto.username;
-      accountant.email = accountantRegisterdto.email;
+      accountant.username = accountantRegisterDto.username;
+      accountant.email = accountantRegisterDto.email;
       accountant.password = bcrypt.hashSync(
-        `${accountantRegisterdto.password}`,
+        `${accountantRegisterDto.password}`,
         10,
       );
 
@@ -35,11 +34,11 @@ export class AccountantService {
     }
   }
 
-  public async searchAccountant(searchAccountantdto: SearchAccountantdto) {
-    const take = searchAccountantdto.take || 10;
-    const page = searchAccountantdto.page || 1;
+  public async searchAccountant(searchAccountantDto: SearchAccountantDto) {
+    const take = searchAccountantDto.take || 10;
+    const page = searchAccountantDto.page || 1;
     const skip = (page - 1) * take;
-    const filter = searchAccountantdto.name || '';
+    const filter = searchAccountantDto.name || '';
 
     try {
       const [result, total] = await this.accountantRepository.findAndCount({
@@ -58,8 +57,8 @@ export class AccountantService {
     }
   }
 
-  public async findOneAccountant(getOneAccountantdto: GetOneAccountantdto) {
-    const { id } = getOneAccountantdto;
+  public async findOneAccountant(getOneAccountantDto: any) {
+    const { id } = getOneAccountantDto;
     try {
       if (!id) {
         const rs = await this.accountantRepository.findOne({
@@ -75,8 +74,8 @@ export class AccountantService {
     }
   }
 
-  public async updateAccountant(updateAccountantdto: UpdateAccountantdto) {
-    const { id } = updateAccountantdto;
+  public async updateAccountant(updateAccountantDto: UpdateAccountantDto) {
+    const { id } = updateAccountantDto;
     try {
       const accountant = await this.accountantRepository.findOne({
         where: { id },
@@ -89,9 +88,9 @@ export class AccountantService {
     }
   }
 
-  public async removeAccountant(deleteAccountantdto: DeleteAccountantdto) {
+  public async removeAccountant(deleteAccountantDto: DeleteAccountantDto) {
     try {
-      const { id } = deleteAccountantdto;
+      const { id } = deleteAccountantDto;
 
       const rs = await this.accountantRepository.delete(id);
       return rs;

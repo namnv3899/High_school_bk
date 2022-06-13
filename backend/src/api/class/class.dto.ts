@@ -6,10 +6,6 @@ export class CreateClassdto {
   @IsNotEmpty()
   id: number;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  studentId: number;
-
   @ApiProperty({ example: '11A2' })
   @IsNotEmpty()
   @IsString()
@@ -56,6 +52,70 @@ export class CreateClassdto {
   @ApiProperty()
   @IsNotEmpty()
   DayOfWeek: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  schoolYear: number;
+}
+
+export class TimetableDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  id: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  classId: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  subjectId: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  lesson: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  dayOfWeek: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  sessionOfDay: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  schoolYear: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  semester: number;
+}
+
+export class AssignClassTeacherDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  id: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  teacherId: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  classId: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  subjectId: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  role: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  semester: number;
 
   @ApiProperty()
   @IsNotEmpty()

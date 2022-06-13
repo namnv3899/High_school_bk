@@ -10,6 +10,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Classroom, ClassSubject, ClassTeacher } from '../class/class.entity';
+import { StudentSubject } from '../score/scores.entity';
 
 @Entity({ name: 'Student' })
 export class Student {
@@ -120,52 +121,4 @@ export class Subject {
   @OneToOne(() => ClassTeacher, (classTeacher) => classTeacher.subject)
   @JoinColumn()
   classTeacher: ClassTeacher;
-}
-
-@Entity({ name: 'StudentSubject' })
-export class StudentSubject {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  studentId: number;
-
-  @Column()
-  score15m1: number;
-
-  @Column()
-  score15m2: number;
-
-  @Column()
-  score15m3: number;
-
-  @Column()
-  score45m1: number;
-
-  @Column()
-  score45m2: number;
-
-  @Column()
-  score90m: number;
-
-  @Column()
-  averageScore: number;
-
-  @Column()
-  schoolYear: number;
-
-  @Column()
-  semester: number;
-
-  @Column()
-  startTimeCalculationScore: number;
-
-  @Column()
-  endTimeCalculationScore: number;
-
-  @ManyToOne(() => Subject, (subject) => subject.studentSubjects)
-  subject: Subject;
-
-  @ManyToOne(() => Student, (student) => student.studentSubjects)
-  student: Student;
 }

@@ -2,7 +2,6 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  // OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
@@ -13,19 +12,11 @@ import {
 import { Facility } from '../facility/facility.entity';
 import { Student, Subject } from '../students/students.entity';
 import { Teacher } from '../teacher/teacher.entity';
-// import { Like } from '../likes/likes.entity';
-// import { Comment } from '../comments/comments.entity';
-// import { Follow } from '../follows/follows.entity';
-// import { Photo } from '../photos/photos.entity';
-// import { AlbumUser } from '../albums/albums.entity';
 
 @Entity({ name: 'Classroom' })
 export class Classroom {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  studentId: number;
 
   @Column()
   name: string;

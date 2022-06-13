@@ -6,6 +6,7 @@ import { AuthModule } from './api/auth/auth.module';
 import { ClassModule } from './api/class/class.module';
 import { FacilityModule } from './api/facility/facility.module';
 import { SalaryModule } from './api/salary/salary.module';
+import { ScoreModule } from './api/score/scores.module';
 import { StudentsModule } from './api/students/students.module';
 import { TeacherModule } from './api/teacher/teacher.module';
 // import { configs } from './config/config';
@@ -35,6 +36,7 @@ import { TeacherModule } from './api/teacher/teacher.module';
     FacilityModule,
     SalaryModule,
     TeacherModule,
+    ScoreModule,
   ],
   controllers: [],
   providers: [],

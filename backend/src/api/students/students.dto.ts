@@ -76,7 +76,7 @@ export class StudentRegisterdto {
 
   @ApiProperty()
   @IsNotEmpty()
-  fatherDateOfBirth: string;
+  fatherDateOfBirth: Date;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -92,7 +92,7 @@ export class StudentRegisterdto {
 
   @ApiProperty()
   @IsNotEmpty()
-  motherPhone: string;
+  motherPhone: number;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -164,7 +164,7 @@ export class UpdateStudentdto {
   fatherPhone: number;
 
   @ApiProperty()
-  fatherDateOfBirth: string;
+  fatherDateOfBirth: Date;
 
   @ApiProperty()
   fatherJobAddress: string;
@@ -176,7 +176,7 @@ export class UpdateStudentdto {
   motherJob: string;
 
   @ApiProperty()
-  motherPhone: string;
+  motherPhone: number;
 
   @ApiProperty()
   motherDateOfBirth: Date;

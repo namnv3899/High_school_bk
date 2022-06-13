@@ -8,14 +8,16 @@ import {
   Param,
   Patch,
   Query,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 import { SalaryService } from './salary.service';
 import {
-  GetOneSalarydto,
-  SearchSalarydto,
-  UpdateSalarydto,
+  GetOneSalaryDto,
+  CreateSalaryDto,
+  SearchSalaryDto,
+  UpdateSalaryDto,
 } from './salary.dto';
 
 @ApiTags('Salary')
@@ -23,30 +25,47 @@ import {
 export class SalaryController {
   constructor(private readonly salaryService: SalaryService) {}
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  public async findAll(@Query() searchSalarydto: SearchSalarydto, @Res() res) {
+  public async createSalary(
+    @Query() createSalaryDto: CreateSalaryDto,
+    @Res() res,
+  ) {
     try {
-      const data = await this.salaryService.searchSalary(searchSalarydto);
+      const data = await this.salaryService.createSalary(createSalaryDto);
       res.json({ data });
     } catch (error) {
       throw error;
     }
   }
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get()
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async findAll(@Query() searchSalaryDto: SearchSalaryDto, @Res() res) {
+    try {
+      const data = await this.salaryService.searchSalary(searchSalaryDto);
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Get('one/:id')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 404, description: 'Not found' })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  public async findOne(@Param() getOneSalarydto: GetOneSalarydto, @Res() res) {
+  public async findOne(@Param() getOneSalaryDto: GetOneSalaryDto, @Res() res) {
     try {
-      const data = await this.salaryService.findOneSalary(getOneSalarydto);
+      const data = await this.salaryService.findOneSalary(getOneSalaryDto);
 
       if (!data) {
         throw new HttpException('Salary is not found', HttpStatus.NOT_FOUND);
@@ -58,19 +77,19 @@ export class SalaryController {
     }
   }
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Patch()
   @ApiResponse({ status: 200, description: 'Updated' })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async updateInfor(
-    @Body() updateSalarydto: UpdateSalarydto,
+    @Body() updateSalaryDto: UpdateSalaryDto,
     @Res() res,
   ) {
     try {
       const data = await this.salaryService.updateSalary({
-        ...updateSalarydto,
+        ...updateSalaryDto,
       });
 
       res.json({ data });

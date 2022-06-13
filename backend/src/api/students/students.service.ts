@@ -9,6 +9,7 @@ import {
   SearchStudentdto,
   StudentRegisterdto,
 } from './students.dto';
+import { ClassService } from '../class/class.service';
 
 @Injectable()
 export class StudentsService {
@@ -19,15 +20,38 @@ export class StudentsService {
     private readonly studentSubjectRepository: Repository<StudentSubject>,
     @InjectRepository(Subject)
     private readonly subjectRepository: Repository<Subject>,
+    private readonly classService: ClassService,
   ) {}
 
   public async createStudent(studentRegisterdto: StudentRegisterdto) {
     try {
+      const classroom = await this.classService.findOneClass({
+        id: studentRegisterdto.classId,
+      });
       const student = new Student();
       student.username = studentRegisterdto.username;
       student.email = studentRegisterdto.email;
       student.password = bcrypt.hashSync(`${studentRegisterdto.password}`, 10);
-
+      student.id = studentRegisterdto.id;
+      student.name = studentRegisterdto.name;
+      student.sex = studentRegisterdto.sex;
+      student.dateOfBirth = studentRegisterdto.dateOfBirth;
+      student.address = studentRegisterdto.address;
+      student.phone = studentRegisterdto.phone;
+      student.startStudying = studentRegisterdto.startStudying;
+      student.endStudying = studentRegisterdto.endStudying;
+      student.fatherName = studentRegisterdto.fatherName;
+      student.fatherJob = studentRegisterdto.fatherJob;
+      student.fatherPhone = studentRegisterdto.fatherPhone;
+      student.fatherDateOfBirth = studentRegisterdto.fatherDateOfBirth;
+      student.fatherJobAddress = studentRegisterdto.fatherJobAddress;
+      student.motherName = studentRegisterdto.motherName;
+      student.motherJob = studentRegisterdto.motherJob;
+      student.motherDateOfBirth = studentRegisterdto.motherDateOfBirth;
+      student.motherPhone = studentRegisterdto.motherPhone;
+      student.schoolYear = studentRegisterdto.schoolYear;
+      student.semester = studentRegisterdto.semester;
+      student.classroom = classroom;
       const rs = await this.studentRepository.save(student);
       return rs;
     } catch (error) {
@@ -61,14 +85,9 @@ export class StudentsService {
   public async findOneStudent(filter: any) {
     const { id, username, email } = filter;
     try {
-      if (!id) {
-        const rs = await this.studentRepository.findOne({
-          where: [{ email }, { username }],
-        });
-        return rs;
-      }
-
-      const rs = await this.studentRepository.findOne({ where: { id } });
+      const rs = await this.studentRepository.findOne({
+        where: [{ email }, { username }, { id }],
+      });
       return rs;
     } catch (error) {
       throw error;
@@ -81,7 +100,23 @@ export class StudentsService {
       const student = await this.studentRepository.findOne({ where: { id } });
       student.email = email;
       student.username = username;
-
+      student.sex = updateStudentdto.sex;
+      student.dateOfBirth = updateStudentdto.dateOfBirth;
+      student.address = updateStudentdto.address;
+      student.phone = updateStudentdto.phone;
+      student.startStudying = updateStudentdto.startStudying;
+      student.endStudying = updateStudentdto.endStudying;
+      student.fatherName = updateStudentdto.fatherName;
+      student.fatherJob = updateStudentdto.fatherJob;
+      student.fatherPhone = updateStudentdto.fatherPhone;
+      student.fatherDateOfBirth = updateStudentdto.fatherDateOfBirth;
+      student.fatherJobAddress = updateStudentdto.fatherJobAddress;
+      student.motherName = updateStudentdto.motherName;
+      student.motherJob = updateStudentdto.motherJob;
+      student.motherDateOfBirth = updateStudentdto.motherDateOfBirth;
+      student.motherPhone = updateStudentdto.motherPhone;
+      student.schoolYear = updateStudentdto.schoolYear;
+      student.semester = updateStudentdto.semester;
       const rs = await this.studentRepository.save(student);
       return rs;
     } catch (error) {

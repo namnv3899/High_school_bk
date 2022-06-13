@@ -7,7 +7,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-export class AccountantRegisterdto {
+export class AccountantRegisterDto {
   @ApiProperty()
   @IsNotEmpty()
   id: number;
@@ -59,19 +59,19 @@ export class AccountantRegisterdto {
   phone: number;
 }
 
-export class UpdateAccountantdto {
+export class UpdateAccountantDto {
   @ApiProperty()
   @IsNotEmpty()
   id: number;
 }
 
-export class GetOneAccountantdto {
+export class GetOneAccountantDto {
   @ApiProperty()
   @IsNotEmpty()
   id: number;
 }
 
-export class SearchAccountantdto {
+export class SearchAccountantDto {
   @ApiProperty({ example: 'Nam', nullable: true })
   name: string;
 
@@ -82,7 +82,7 @@ export class SearchAccountantdto {
   page: number;
 }
 
-export class DeleteAccountantdto {
+export class DeleteAccountantDto {
   @ApiProperty()
   @IsNotEmpty()
   id: number;

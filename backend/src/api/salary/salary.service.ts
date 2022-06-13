@@ -3,35 +3,55 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Salary } from './salary.entity';
 import {
-  GetOneSalarydto,
-  SearchSalarydto,
-  UpdateSalarydto,
+  GetOneSalaryDto,
+  CreateSalaryDto,
+  SearchSalaryDto,
+  UpdateSalaryDto,
 } from './salary.dto';
+import { TeacherService } from '../teacher/teacher.service';
+import { AccountantService } from '../accountant/accountant.service';
 
 @Injectable()
 export class SalaryService {
   constructor(
     @InjectRepository(Salary)
     private readonly salaryRepository: Repository<Salary>,
+    private readonly teacherService: TeacherService,
+    private readonly accountantService: AccountantService,
   ) {}
 
-  public async createSalary(getOneSalarydto: GetOneSalarydto) {
-    const { teacherId } = getOneSalarydto;
+  public async createSalary(createSalaryDto: CreateSalaryDto) {
+    const { teacherId, accountantId } = createSalaryDto;
+    const salary = new Salary();
     try {
-      const rs = await this.salaryRepository.findOne({
-        where: { teacherId },
+      const teacher = await this.teacherService.findOneTeacher({
+        id: teacherId,
       });
+      const accountant = await this.accountantService.findOneAccountant({
+        id: accountantId,
+      });
+
+      salary.teacher = teacher;
+      salary.accountant = accountant;
+      salary.id = createSalaryDto.id;
+      salary.monthOfYear = createSalaryDto.monthOfYear;
+      salary.senioritySalary = createSalaryDto.senioritySalary;
+      salary.totalSalaryDays = createSalaryDto.totalSalaryDays;
+      salary.payDay = createSalaryDto.payday;
+      salary.salaryOfDay = createSalaryDto.salaryOfDay;
+
+      const rs = this.salaryRepository.save(salary);
       return rs;
     } catch (error) {
       throw error;
     }
   }
 
-  public async searchSalary(searchSalarydto: SearchSalarydto) {
-    const take = searchSalarydto.take || 10;
-    const page = searchSalarydto.page || 1;
+  public async searchSalary(searchSalaryDto: SearchSalaryDto) {
+    const take = searchSalaryDto.take || 10;
+    const page = searchSalaryDto.page || 1;
     const skip = (page - 1) * take;
-    // const filter = searchSalarydto.name || '';
+    // const filter = searchSalaryDto.name || '';
 
     try {
       const [result, total] = await this.salaryRepository.findAndCount({
@@ -50,8 +70,8 @@ export class SalaryService {
     }
   }
 
-  public async findOneSalary(getOneSalarydto: GetOneSalarydto) {
-    const { teacherId } = getOneSalarydto;
+  public async findOneSalary(getOneSalaryDto: GetOneSalaryDto) {
+    const { teacherId } = getOneSalaryDto;
     try {
       const rs = await this.salaryRepository.findOne({
         where: { teacherId },
@@ -62,8 +82,8 @@ export class SalaryService {
     }
   }
 
-  public async updateSalary(updateSalarydto: UpdateSalarydto) {
-    const { teacherId } = updateSalarydto;
+  public async updateSalary(updateSalaryDto: UpdateSalaryDto) {
+    const { teacherId } = updateSalaryDto;
     try {
       const salary = await this.salaryRepository.findOne({
         where: { teacherId },

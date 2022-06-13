@@ -26,7 +26,7 @@ export class Salary {
   monthOfYear: number;
 
   @Column()
-  payDay: number;
+  payDay: Date;
 
   @Column()
   totalSalaryDays: number;

@@ -1,17 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, MinLength } from 'class-validator';
 
-export class Logindto {
+export enum Role {
+  student = 'Student',
+  teacher = 'Teacher',
+  accountant = 'Accountant',
+  admin = 'Admin',
+  parent = 'Parent',
+}
+
+export class LoginDto {
   @ApiProperty({ example: 'Iris123' })
   username: string;
 
   @ApiProperty({ example: 'iris123@gmail.com' })
   email: string;
 
-  @ApiProperty({
-    example: 'One of: Student / Teacher / Accountant / Admin / Parent',
-  })
-  role: string;
+  @ApiProperty({ example: Role })
+  role: Role;
 
   @ApiProperty()
   @MinLength(6)

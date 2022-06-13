@@ -8,7 +8,11 @@ import {
   GetOneClassdto,
   SearchClassdto,
   DeleteClassdto,
+  TimetableDto,
+  AssignClassTeacherDto,
 } from './class.dto';
+import { Subject } from '../students/students.entity';
+import { TeacherService } from '../teacher/teacher.service';
 
 @Injectable()
 export class ClassService {
@@ -19,15 +23,74 @@ export class ClassService {
     private readonly classSubjectRepository: Repository<ClassSubject>,
     @InjectRepository(ClassTeacher)
     private readonly classTeacherRepository: Repository<ClassTeacher>,
+    @InjectRepository(Subject)
+    private readonly SubjectRepository: Repository<Subject>,
+    private readonly teacherService: TeacherService,
   ) {}
 
   public async createClass(createClassdto: CreateClassdto) {
     try {
       const classroom = new Classroom();
-      classroom.name = createClassdto.name;
       classroom.id = createClassdto.id;
+      classroom.name = createClassdto.name;
+      classroom.location = createClassdto.location;
+      classroom.startYear = createClassdto.startYear;
+      classroom.endYear = createClassdto.endYear;
 
       const rs = await this.classroomRepository.save(classroom);
+      return rs;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async createTimetable(timetableDto: TimetableDto) {
+    const classSubject = new ClassSubject();
+    const { classId, subjectId } = timetableDto;
+    try {
+      const subject = await this.SubjectRepository.findOne({
+        where: { id: subjectId },
+      });
+      const classroom = await this.classroomRepository.findOne({
+        where: { id: classId },
+      });
+      classSubject.id = timetableDto.id;
+      classSubject.lesson = timetableDto.lesson;
+      classSubject.dayOfWeek = timetableDto.dayOfWeek;
+      classSubject.sessionOfDay = timetableDto.sessionOfDay;
+      classSubject.schoolYear = timetableDto.schoolYear;
+      classSubject.semester = timetableDto.semester;
+      classSubject.classroom = classroom;
+      classSubject.subject = subject;
+
+      const rs = await this.classroomRepository.save(classSubject);
+      return rs;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async assignClassTeacher(
+    assignClassTeacherDto: AssignClassTeacherDto,
+  ) {
+    const { classId, teacherId } = assignClassTeacherDto;
+    try {
+      const classroom = await this.classroomRepository.findOne({
+        where: { id: classId },
+      });
+      const teacher = await this.teacherService.findOneTeacher({
+        where: { id: teacherId },
+      });
+
+      const classTeacher = new ClassTeacher();
+      classTeacher.id = assignClassTeacherDto.id;
+      classTeacher.role = assignClassTeacherDto.role;
+      classTeacher.schoolYear = assignClassTeacherDto.schoolYear;
+      classTeacher.semester = assignClassTeacherDto.semester;
+      classTeacher.teacher = teacher;
+      classTeacher.classroom = classroom;
+
+      const rs = await this.classTeacherRepository.save(classTeacher);
       return rs;
     } catch (error) {
       throw error;

@@ -10,9 +10,10 @@ import {
   Patch,
   Query,
   Post,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 import { ClassService } from './class.service';
 import {
   UpdateClassdto,
@@ -20,6 +21,8 @@ import {
   GetOneClassdto,
   SearchClassdto,
   DeleteClassdto,
+  TimetableDto,
+  AssignClassTeacherDto,
 } from './class.dto';
 
 @ApiTags('Class')
@@ -27,8 +30,8 @@ import {
 export class ClassController {
   constructor(private readonly classService: ClassService) {}
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -44,8 +47,40 @@ export class ClassController {
     }
   }
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @Post()
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async createTimetable(
+    @Query() timetableDto: TimetableDto,
+    @Res() res,
+  ) {
+    try {
+      const data = await this.classService.createTimetable(timetableDto);
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @Post()
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async assignClassTeacher(
+    @Query() assignClassTeacherDto: AssignClassTeacherDto,
+    @Res() res,
+  ) {
+    try {
+      const data = await this.classService.assignClassTeacher(
+        assignClassTeacherDto,
+      );
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -58,8 +93,8 @@ export class ClassController {
     }
   }
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Get('one/:id')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 404, description: 'Not found' })
@@ -79,8 +114,8 @@ export class ClassController {
     }
   }
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Patch()
   @ApiResponse({ status: 200, description: 'Updated' })
   @ApiResponse({ status: 400, description: 'Bad request' })
@@ -95,8 +130,8 @@ export class ClassController {
     }
   }
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 400, description: 'Bad request' })

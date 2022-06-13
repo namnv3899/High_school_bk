@@ -9,19 +9,28 @@ import {
   GetOneFacilitydto,
   SearchFacilitydto,
 } from './facility.dto';
+import { ClassService } from '../class/class.service';
 
 @Injectable()
 export class FacilityService {
   constructor(
     @InjectRepository(Facility)
     private readonly facilityRepository: Repository<Facility>,
+    private readonly classService: ClassService,
   ) {}
 
   public async createFacility(createFacilitydto: CreateFacilitydto) {
     try {
+      const classroom = await this.classService.findOneClass({
+        id: createFacilitydto.classId,
+      });
       const facility = new Facility();
       facility.name = createFacilitydto.name;
       facility.price = createFacilitydto.price;
+      facility.classroom = classroom;
+      facility.location = createFacilitydto.location;
+      facility.timeIn = createFacilitydto.timeIn;
+      facility.status = createFacilitydto.status;
 
       const rs = await this.facilityRepository.save(facility);
       return rs;

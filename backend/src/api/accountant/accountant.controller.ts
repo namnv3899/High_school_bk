@@ -11,16 +11,17 @@ import {
   Patch,
   Query,
   Post,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 import { AccountantService } from './accountant.service';
 import {
-  GetOneAccountantdto,
-  AccountantRegisterdto,
-  DeleteAccountantdto,
-  SearchAccountantdto,
-  UpdateAccountantdto,
+  GetOneAccountantDto,
+  AccountantRegisterDto,
+  DeleteAccountantDto,
+  SearchAccountantDto,
+  UpdateAccountantDto,
 } from './accountant.dto';
 
 @ApiTags('Accountant')
@@ -28,18 +29,18 @@ import {
 export class AccountantController {
   constructor(private readonly accountantService: AccountantService) {}
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async createAccountant(
-    @Query() accountantRegisterdto: AccountantRegisterdto,
+    @Query() accountantRegisterDto: AccountantRegisterDto,
     @Res() res,
   ) {
     try {
       const data = await this.accountantService.createAccountant(
-        accountantRegisterdto,
+        accountantRegisterDto,
       );
       res.json({ data });
     } catch (error) {
@@ -47,18 +48,18 @@ export class AccountantController {
     }
   }
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async findAll(
-    @Query() searchAccountantdto: SearchAccountantdto,
+    @Query() searchAccountantDto: SearchAccountantDto,
     @Res() res,
   ) {
     try {
       const data = await this.accountantService.searchAccountant(
-        searchAccountantdto,
+        searchAccountantDto,
       );
       res.json({ data });
     } catch (error) {
@@ -66,20 +67,20 @@ export class AccountantController {
     }
   }
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Get('one/:id')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 404, description: 'Not found' })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async findOne(
-    @Param() getOneAccountantdto: GetOneAccountantdto,
+    @Param() getOneAccountantDto: GetOneAccountantDto,
     @Res() res,
   ) {
     try {
       const data = await this.accountantService.findOneAccountant(
-        getOneAccountantdto,
+        getOneAccountantDto,
       );
 
       if (!data) {
@@ -95,21 +96,21 @@ export class AccountantController {
     }
   }
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Patch()
   @ApiResponse({ status: 200, description: 'Updated' })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async updateInfor(
-    @Body() updateAccountantdto: UpdateAccountantdto,
+    @Body() updateAccountantDto: UpdateAccountantDto,
     @Res() res,
     @Req() req,
   ) {
     const { id } = req.user;
     try {
       const data = await this.accountantService.updateAccountant({
-        ...updateAccountantdto,
+        ...updateAccountantDto,
         id,
       });
 
@@ -119,19 +120,19 @@ export class AccountantController {
     }
   }
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async removeAccountant(
-    @Param() deleteAccountantdto: DeleteAccountantdto,
+    @Param() deleteAccountantDto: DeleteAccountantDto,
     @Res() res,
   ) {
     try {
       const data = await this.accountantService.removeAccountant(
-        deleteAccountantdto,
+        deleteAccountantDto,
       );
       res.json({ data });
     } catch (error) {
