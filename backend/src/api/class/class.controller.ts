@@ -47,7 +47,7 @@ export class ClassController {
     }
   }
 
-  @Post()
+  @Post('timetable')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async createTimetable(
@@ -62,7 +62,7 @@ export class ClassController {
     }
   }
 
-  @Post()
+  @Post('assignClassTeacher')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async assignClassTeacher(

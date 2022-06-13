@@ -6,8 +6,11 @@ import { configs } from '../../config/config';
 import { StudentsModule } from '../students/students.module';
 import { TeacherModule } from '../teacher/teacher.module';
 import { AccountantModule } from '../accountant/accountant.module';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
 
 @Module({
+  controllers: [AuthController],
   imports: [
     PassportModule.register({
       defaultStrategy: 'jwt',
@@ -24,7 +27,7 @@ import { AccountantModule } from '../accountant/accountant.module';
     forwardRef(() => TeacherModule),
     forwardRef(() => AccountantModule),
   ],
-  providers: [JwtStrategy],
-  exports: [PassportModule, JwtModule],
+  providers: [JwtStrategy, AuthService],
+  exports: [PassportModule, JwtModule, AuthService],
 })
 export class AuthModule {}

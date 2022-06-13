@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { Student, StudentSubject, Subject } from './students.entity';
+import { Student, Subject } from './students.entity';
 import {
   UpdateStudentdto,
   DeleteStudentdto,
@@ -16,10 +16,9 @@ export class StudentsService {
   constructor(
     @InjectRepository(Student)
     private readonly studentRepository: Repository<Student>,
-    @InjectRepository(StudentSubject)
-    private readonly studentSubjectRepository: Repository<StudentSubject>,
     @InjectRepository(Subject)
     private readonly subjectRepository: Repository<Subject>,
+    @Inject(forwardRef(() => ClassService))
     private readonly classService: ClassService,
   ) {}
 

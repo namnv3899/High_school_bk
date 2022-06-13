@@ -16,7 +16,7 @@ export class LoginDto {
   @ApiProperty({ example: 'iris123@gmail.com' })
   email: string;
 
-  @ApiProperty({ example: Role })
+  @ApiProperty({ example: Role.student })
   role: Role;
 
   @ApiProperty()

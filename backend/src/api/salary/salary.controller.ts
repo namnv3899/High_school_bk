@@ -9,6 +9,7 @@ import {
   Patch,
   Query,
   UseGuards,
+  Post,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
@@ -27,7 +28,7 @@ export class SalaryController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Get()
+  @Post()
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async createSalary(

@@ -74,7 +74,7 @@ export class ScoreController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Get()
+  @Get('averageScore')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async averageScore(
