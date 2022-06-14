@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Subject } from '../students/students.entity';
@@ -25,6 +25,10 @@ export class ScoreService {
   public async createScore(createScoreDto: CreateScoreDto) {
     const { studentId, subjectId } = createScoreDto;
     const score = new StudentSubject();
+    const startTimeCalScore =
+      Math.floor(new Date().getTime()) + 1000 * 7 * 24 * 60 * 60 * 12;
+    const endTimeCalScore =
+      Math.floor(new Date().getTime()) + 1000 * 7 * 24 * 60 * 60 * 14;
     try {
       const student = await this.studentsService.findOneStudent({
         id: studentId,
@@ -35,8 +39,8 @@ export class ScoreService {
       score.id = createScoreDto.id;
       score.schoolYear = createScoreDto.schoolYear;
       score.semester = createScoreDto.semester;
-      score.startTimeCalculationScore = 10000000;
-      score.endTimeCalculationScore = score.startTimeCalculationScore + 1;
+      score.startTimeCalculationScore = startTimeCalScore;
+      score.endTimeCalculationScore = endTimeCalScore;
       score.student = student;
       score.subject = subject;
 
@@ -48,9 +52,22 @@ export class ScoreService {
   }
 
   public async updateScore(updateScoreDto: UpdateScoreDto) {
-    const score = new StudentSubject();
     try {
-      score.id = updateScoreDto.id;
+      const score = await this.scoreRepository.findOne({
+        where: { id: updateScoreDto.id },
+      });
+
+      if (score.endTimeCalculationScore < Math.floor(new Date().getTime())) {
+        throw new BadRequestException('Time over to enter score');
+      }
+
+      score.score15m1 = updateScoreDto.score15m1;
+      score.score15m2 = updateScoreDto.score15m2;
+      score.score15m3 = updateScoreDto.score15m3;
+      score.score45m1 = updateScoreDto.score45m1;
+      score.score45m2 = updateScoreDto.score45m2;
+      score.score90m = updateScoreDto.score90m;
+
       const rs = await this.scoreRepository.save(score);
       return rs;
     } catch (error) {
@@ -59,10 +76,10 @@ export class ScoreService {
   }
 
   public async getScore(getScoreDto: GetScoreDto) {
-    const score = new StudentSubject();
     try {
-      score.id = getScoreDto.id;
-      const rs = await this.scoreRepository.save(score);
+      const rs = await this.scoreRepository.findOne({
+        where: { id: getScoreDto.id },
+      });
       return rs;
     } catch (error) {
       throw error;
@@ -70,10 +87,27 @@ export class ScoreService {
   }
 
   public async averageScore(averageScoreDto: AverageScoreDto) {
-    const score = new StudentSubject();
     try {
-      score.id = averageScoreDto.id;
-      const rs = await this.scoreRepository.save(score);
+      const score = await this.scoreRepository.findOne({
+        where: { id: averageScoreDto.id },
+      });
+
+      if (score.startTimeCalculationScore > Math.floor(new Date().getTime())) {
+        throw new BadRequestException("It's not time to calculation score yet");
+      }
+
+      if (score.endTimeCalculationScore < Math.floor(new Date().getTime())) {
+        throw new BadRequestException('timeover to calculation score');
+      }
+
+      const rs =
+        (score.score15m1 +
+          score.score15m2 +
+          score.score15m3 +
+          score.score45m1 * 2 +
+          score.score45m2 * 2 +
+          score.score90m * 3) /
+        10;
       return rs;
     } catch (error) {
       throw error;
@@ -81,10 +115,8 @@ export class ScoreService {
   }
 
   public async deleteScore(deleteScoreDto: DeleteScoreDto) {
-    const score = new StudentSubject();
     try {
-      score.id = deleteScoreDto.id;
-      const rs = await this.scoreRepository.save(score);
+      const rs = await this.scoreRepository.delete(deleteScoreDto.id);
       return rs;
     } catch (error) {
       throw error;

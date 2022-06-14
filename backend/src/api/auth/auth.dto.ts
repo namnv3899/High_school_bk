@@ -24,3 +24,19 @@ export class LoginDto {
   @IsNotEmpty()
   password: string;
 }
+
+export class AdminRegisterDto {
+  @ApiProperty({ example: '001' })
+  id: number;
+
+  @ApiProperty({ example: 'Iris123' })
+  username: string;
+
+  @ApiProperty({ example: 'iris123@gmail.com' })
+  email: string;
+
+  @ApiProperty()
+  @MinLength(6)
+  @IsNotEmpty()
+  password: string;
+}

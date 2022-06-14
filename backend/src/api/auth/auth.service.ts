@@ -6,10 +6,13 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { LoginDto, Role } from './auth.dto';
+import { AdminRegisterDto, LoginDto, Role } from './auth.dto';
 import { AccountantService } from '../accountant/accountant.service';
 import { StudentsService } from '../students/students.service';
 import { TeacherService } from '../teacher/teacher.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Admin } from '../accountant/accountant.entity';
 
 @Injectable()
 export class AuthService {
@@ -21,7 +24,23 @@ export class AuthService {
     @Inject(forwardRef(() => TeacherService))
     private readonly teacherService: TeacherService,
     private readonly jwtService: JwtService,
+    @InjectRepository(Admin)
+    private readonly adminRepository: Repository<Admin>,
   ) {}
+
+  public async adminRegister(adminRegisterDto: AdminRegisterDto) {
+    const admin = new Admin();
+    try {
+      admin.id = adminRegisterDto.id;
+      admin.email = adminRegisterDto.email;
+      admin.username = adminRegisterDto.username;
+      admin.password = bcrypt.hashSync(`${adminRegisterDto.password}`, 10);
+      const rs = await this.adminRepository.save(admin);
+      return rs;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   public async login(loginDto: LoginDto) {
     const { email, password, role, username } = loginDto;
@@ -30,9 +49,20 @@ export class AuthService {
     let token: any;
     try {
       switch (role) {
-        // case Role.admin:
-        //   user = await this.adminService.findOne()
-        //   break;
+        case Role.admin:
+          user = await this.adminRepository.findOne({
+            where: [{ email }, { username }],
+          });
+          if (!user) {
+            throw new BadRequestException('Email or username wrong');
+          }
+          checkValidPassword = bcrypt.compare(user.password, password);
+          if (!checkValidPassword) {
+            throw new BadRequestException('Password wrong');
+          }
+          token = this.jwtService.sign({ id: user.id });
+          break;
+
         case Role.student:
           user = await this.studentsService.findOneStudent({ email, username });
           if (!user) {
