@@ -15,9 +15,6 @@ export class Accountant {
   id: number;
 
   @Column()
-  salaryId: number;
-
-  @Column()
   username: string;
 
   @Column()
@@ -36,13 +33,13 @@ export class Accountant {
   password: string;
 
   @Column()
-  dateOfBirth: string;
+  dateOfBirth: Date;
 
   @Column()
   startWorking: Date;
 
   @Column()
-  endWorking: string;
+  endWorking: Date;
 
   @Column({ nullable: true })
   tokenVerify: string;
@@ -65,12 +62,6 @@ export class Admin {
 
   @Column()
   username: string;
-
-  @Column()
-  name: string;
-
-  @Column()
-  email: string;
 
   @Column()
   password: string;

@@ -8,23 +8,19 @@ import {
 } from 'class-validator';
 
 export class TeacherRegisterdto {
-  @ApiProperty({ example: '001' })
-  @IsNotEmpty()
-  id: number;
-
-  @ApiProperty({ example: 'Iris123' })
+  @ApiProperty({ example: 'Hung' })
   @IsNotEmpty()
   @IsString()
   @MaxLength(40)
   username: string;
 
-  @ApiProperty({ example: 'Nguyen Van Nam' })
+  @ApiProperty({ example: 'Nguyen Van Hung' })
   @IsNotEmpty()
   @IsString()
   @MaxLength(40)
   name: string;
 
-  @ApiProperty({ example: 'iris123@gmail.com' })
+  @ApiProperty({ example: 'hung@gmail.com' })
   @IsNotEmpty()
   @IsEmail()
   email: string;
@@ -39,24 +35,24 @@ export class TeacherRegisterdto {
   @IsString()
   sex: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: '1943-09-03' })
   @IsNotEmpty()
   dateOfBirth: Date;
 
-  @ApiProperty()
+  @ApiProperty({ example: '31 ngo Duy Hung, tp Ha Noi' })
   @IsNotEmpty()
   @IsString()
   address: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 243242473 })
   @IsNotEmpty()
   phone: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: '2021-02-19' })
   @IsNotEmpty()
   startWorking: Date;
 
-  @ApiProperty()
+  @ApiProperty({ example: '2021-02-19' })
   @IsNotEmpty()
   endWorking: Date;
 }

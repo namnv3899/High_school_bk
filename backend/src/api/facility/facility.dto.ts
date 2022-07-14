@@ -4,10 +4,6 @@ import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 export class CreateFacilitydto {
   @ApiProperty()
   @IsNotEmpty()
-  id: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
   classId: number;
 
   @ApiProperty({ example: 'Seas' })

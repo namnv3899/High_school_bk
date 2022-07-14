@@ -5,8 +5,9 @@ const envFound: DotenvConfigOutput = config();
 if (!envFound) {
   throw new Error('.env file was not found.');
 }
+
 const db = {
-  type: String(process.env.DB_TYPE),
+  type: process.env.DB_TYPE,
   synchronize: true,
   logging: 'all',
   host: String(process.env.DB_HOST),

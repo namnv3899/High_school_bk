@@ -31,7 +31,6 @@ export class StudentsService {
       student.username = studentRegisterdto.username;
       student.email = studentRegisterdto.email;
       student.password = bcrypt.hashSync(`${studentRegisterdto.password}`, 10);
-      student.id = studentRegisterdto.id;
       student.name = studentRegisterdto.name;
       student.sex = studentRegisterdto.sex;
       student.dateOfBirth = studentRegisterdto.dateOfBirth;

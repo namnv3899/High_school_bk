@@ -31,9 +31,11 @@ export class SalaryService {
         id: accountantId,
       });
 
+      salary.accountantId = accountant.id;
+      salary.teacherId = teacher.id;
+      salary.techerName = teacher.name;
       salary.teacher = teacher;
       salary.accountant = accountant;
-      salary.id = createSalaryDto.id;
       salary.monthOfYear = createSalaryDto.monthOfYear;
       salary.senioritySalary = createSalaryDto.senioritySalary;
       salary.totalSalaryDays = createSalaryDto.totalSalaryDays;

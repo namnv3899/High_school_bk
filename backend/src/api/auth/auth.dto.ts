@@ -10,32 +10,26 @@ export enum Role {
 }
 
 export class LoginDto {
-  @ApiProperty({ example: 'Iris123' })
+  @ApiProperty({ example: 'admin' })
   username: string;
 
-  @ApiProperty({ example: 'iris123@gmail.com' })
-  email: string;
-
-  @ApiProperty({ example: Role.student })
+  @ApiProperty({ example: Role.admin })
   role: Role;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'admin@gmail.com' })
+  email: string;
+
+  @ApiProperty({ example: 'admin123' })
   @MinLength(6)
   @IsNotEmpty()
   password: string;
 }
 
 export class AdminRegisterDto {
-  @ApiProperty({ example: '001' })
-  id: number;
-
-  @ApiProperty({ example: 'Iris123' })
+  @ApiProperty({ example: 'admin' })
   username: string;
 
-  @ApiProperty({ example: 'iris123@gmail.com' })
-  email: string;
-
-  @ApiProperty()
+  @ApiProperty({ example: 'admin123' })
   @MinLength(6)
   @IsNotEmpty()
   password: string;

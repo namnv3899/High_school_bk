@@ -28,7 +28,6 @@ export class TeacherService {
       teacher.startWorking = teacherRegisterdto.startWorking;
       teacher.endWorking = teacherRegisterdto.endWorking;
       teacher.phone = teacherRegisterdto.phone;
-      teacher.id = teacherRegisterdto.id;
       teacher.name = teacherRegisterdto.name;
       teacher.sex = teacherRegisterdto.sex;
 
