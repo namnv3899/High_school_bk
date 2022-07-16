@@ -31,7 +31,6 @@ export class StudentsService {
       student.username = studentRegisterdto.username;
       student.email = studentRegisterdto.email;
       student.password = bcrypt.hashSync(`${studentRegisterdto.password}`, 10);
-      student.id = studentRegisterdto.id;
       student.name = studentRegisterdto.name;
       student.sex = studentRegisterdto.sex;
       student.dateOfBirth = studentRegisterdto.dateOfBirth;
@@ -48,8 +47,6 @@ export class StudentsService {
       student.motherJob = studentRegisterdto.motherJob;
       student.motherDateOfBirth = studentRegisterdto.motherDateOfBirth;
       student.motherPhone = studentRegisterdto.motherPhone;
-      student.schoolYear = studentRegisterdto.schoolYear;
-      student.semester = studentRegisterdto.semester;
       student.classroom = classroom;
       const rs = await this.studentRepository.save(student);
       return rs;
@@ -114,8 +111,6 @@ export class StudentsService {
       student.motherJob = updateStudentdto.motherJob;
       student.motherDateOfBirth = updateStudentdto.motherDateOfBirth;
       student.motherPhone = updateStudentdto.motherPhone;
-      student.schoolYear = updateStudentdto.schoolYear;
-      student.semester = updateStudentdto.semester;
       const rs = await this.studentRepository.save(student);
       return rs;
     } catch (error) {

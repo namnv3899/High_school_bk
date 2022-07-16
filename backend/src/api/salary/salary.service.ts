@@ -33,7 +33,6 @@ export class SalaryService {
 
       salary.teacher = teacher;
       salary.accountant = accountant;
-      salary.id = createSalaryDto.id;
       salary.monthOfYear = createSalaryDto.monthOfYear;
       salary.senioritySalary = createSalaryDto.senioritySalary;
       salary.totalSalaryDays = createSalaryDto.totalSalaryDays;

@@ -26,6 +26,9 @@ export class AccountantService {
         `${accountantRegisterDto.password}`,
         10,
       );
+      accountant.dateOfBirth = accountantRegisterDto.dateOfBirth;
+      accountant.startWorking = accountantRegisterDto.startWorking;
+      accountant.endWorking = accountantRegisterDto.endWorking;
 
       const rs = await this.accountantRepository.save(accountant);
       return rs;

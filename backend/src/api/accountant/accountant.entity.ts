@@ -36,16 +36,13 @@ export class Accountant {
   password: string;
 
   @Column()
-  dateOfBirth: string;
+  dateOfBirth: Date;
 
   @Column()
   startWorking: Date;
 
   @Column()
-  endWorking: string;
-
-  @Column({ nullable: true })
-  tokenVerify: string;
+  endWorking: Date;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
   createdAt: Date;
@@ -65,9 +62,6 @@ export class Admin {
 
   @Column()
   username: string;
-
-  @Column()
-  name: string;
 
   @Column()
   email: string;

@@ -80,12 +80,6 @@ export class Student {
   @Column()
   motherPhone: number;
 
-  @Column()
-  schoolYear: number;
-
-  @Column()
-  semester: number;
-
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
   createdAt: Date;
 

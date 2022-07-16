@@ -2,10 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
 export class CreateClassdto {
-  @ApiProperty()
-  @IsNotEmpty()
-  id: number;
-
   @ApiProperty({ example: '11A2' })
   @IsNotEmpty()
   @IsString()

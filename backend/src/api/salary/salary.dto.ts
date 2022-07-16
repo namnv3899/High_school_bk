@@ -4,10 +4,6 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateSalaryDto {
   @ApiProperty()
   @IsNotEmpty()
-  id: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
   teacherId: number;
 
   @ApiProperty()

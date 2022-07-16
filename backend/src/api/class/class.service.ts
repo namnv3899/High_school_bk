@@ -31,7 +31,6 @@ export class ClassService {
   public async createClass(createClassdto: CreateClassdto) {
     try {
       const classroom = new Classroom();
-      classroom.id = createClassdto.id;
       classroom.name = createClassdto.name;
       classroom.location = createClassdto.location;
       classroom.startYear = createClassdto.startYear;

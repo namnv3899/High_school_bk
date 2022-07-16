@@ -4,10 +4,6 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateScoreDto {
   @ApiProperty()
   @IsNotEmpty()
-  id: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
   studentId: number;
 
   @ApiProperty()

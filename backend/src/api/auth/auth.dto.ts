@@ -26,9 +26,6 @@ export class LoginDto {
 }
 
 export class AdminRegisterDto {
-  @ApiProperty({ example: '001' })
-  id: number;
-
   @ApiProperty({ example: 'Iris123' })
   username: string;
 

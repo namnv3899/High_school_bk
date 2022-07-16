@@ -8,10 +8,6 @@ import {
 } from 'class-validator';
 
 export class TeacherRegisterdto {
-  @ApiProperty({ example: '001' })
-  @IsNotEmpty()
-  id: number;
-
   @ApiProperty({ example: 'Iris123' })
   @IsNotEmpty()
   @IsString()

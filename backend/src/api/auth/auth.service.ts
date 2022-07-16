@@ -31,7 +31,6 @@ export class AuthService {
   public async adminRegister(adminRegisterDto: AdminRegisterDto) {
     const admin = new Admin();
     try {
-      admin.id = adminRegisterDto.id;
       admin.email = adminRegisterDto.email;
       admin.username = adminRegisterDto.username;
       admin.password = bcrypt.hashSync(`${adminRegisterDto.password}`, 10);

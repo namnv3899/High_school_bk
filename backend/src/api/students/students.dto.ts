@@ -10,10 +10,6 @@ import {
 export class StudentRegisterdto {
   @ApiProperty()
   @IsNotEmpty()
-  id: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
   classId: number;
 
   @ApiProperty({ example: 'Iris123' })
@@ -101,14 +97,6 @@ export class StudentRegisterdto {
   @ApiProperty()
   @IsNotEmpty()
   motherJobAddress: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  schoolYear: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  semester: number;
 }
 
 export class GetOneStudentdto {

@@ -36,7 +36,6 @@ export class ScoreService {
       const subject = await this.subjectRepository.findOne({
         where: { id: subjectId },
       });
-      score.id = createScoreDto.id;
       score.schoolYear = createScoreDto.schoolYear;
       score.semester = createScoreDto.semester;
       score.startTimeCalculationScore = startTimeCalScore;

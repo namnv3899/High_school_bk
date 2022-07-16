@@ -10,10 +10,6 @@ import {
 export class AccountantRegisterDto {
   @ApiProperty()
   @IsNotEmpty()
-  id: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
   salaryId: number;
 
   @ApiProperty({ example: 'Iris123' })
