@@ -13,22 +13,22 @@ export class Facility {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   classId: number;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   price: number;
 
-  @Column()
+  @Column({ nullable: true })
   location: string;
 
-  @Column()
+  @Column({ nullable: true })
   timeIn: Date;
 
-  @Column()
+  @Column({ nullable: true })
   status: string;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })

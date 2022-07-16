@@ -14,31 +14,31 @@ export class Accountant {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   username: string;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   sex: string;
 
-  @Column()
+  @Column({ nullable: true })
   phone: number;
 
-  @Column()
+  @Column({ nullable: true })
   password: string;
 
-  @Column()
+  @Column({ nullable: true })
   dateOfBirth: Date;
 
-  @Column()
+  @Column({ nullable: true })
   startWorking: Date;
 
-  @Column()
+  @Column({ nullable: true })
   endWorking: Date;
 
   @Column({ nullable: true })

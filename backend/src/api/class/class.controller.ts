@@ -23,6 +23,7 @@ import {
   DeleteClassdto,
   TimetableDto,
   AssignClassTeacherDto,
+  ParamsUpdate,
 } from './class.dto';
 
 @ApiTags('Class')
@@ -116,13 +117,20 @@ export class ClassController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Patch()
+  @Patch(':id')
   @ApiResponse({ status: 200, description: 'Updated' })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  public async updateInfor(@Body() updateClassdto: UpdateClassdto, @Res() res) {
+  public async updateInfor(
+    @Body() updateClassdto: UpdateClassdto,
+    @Res() res,
+    @Param() paramss: ParamsUpdate,
+  ) {
     try {
-      const data = await this.classService.updateClass(updateClassdto);
+      const data = await this.classService.updateClass({
+        ...updateClassdto,
+        paramss,
+      });
 
       res.json({ data });
     } catch (error) {

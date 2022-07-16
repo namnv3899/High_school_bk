@@ -20,64 +20,64 @@ export class Student {
   @Column()
   classId: number;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   username: string;
 
-  @Column()
+  @Column({ nullable: true })
   sex: string;
 
-  @Column()
+  @Column({ nullable: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   dateOfBirth: Date;
 
-  @Column()
+  @Column({ nullable: true })
   address: string;
 
-  @Column()
+  @Column({ nullable: true })
   password: string;
 
-  @Column()
+  @Column({ nullable: true })
   phone: number;
 
-  @Column()
+  @Column({ nullable: true })
   startStudying: Date;
 
-  @Column()
+  @Column({ nullable: true })
   endStudying: Date;
 
-  @Column()
+  @Column({ nullable: true })
   fatherName: string;
 
-  @Column()
+  @Column({ nullable: true })
   fatherJob: string;
 
-  @Column()
+  @Column({ nullable: true })
   fatherPhone: number;
 
-  @Column()
+  @Column({ nullable: true })
   fatherDateOfBirth: Date;
 
-  @Column()
+  @Column({ nullable: true })
   fatherJobAddress: string;
 
-  @Column()
+  @Column({ nullable: true })
   motherName: string;
 
-  @Column()
+  @Column({ nullable: true })
   motherJob: string;
 
-  @Column()
+  @Column({ nullable: true })
   motherDateOfBirth: Date;
 
-  @Column()
+  @Column({ nullable: true })
   motherJobAddress: string;
 
-  @Column()
+  @Column({ nullable: true })
   motherPhone: number;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
@@ -98,7 +98,7 @@ export class Subject {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
   @Column()

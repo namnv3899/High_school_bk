@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
 import { Classroom, ClassSubject, ClassTeacher } from './class.entity';
 import {
-  UpdateClassdto,
   CreateClassdto,
   GetOneClassdto,
   SearchClassdto,
@@ -129,7 +128,7 @@ export class ClassService {
     }
   }
 
-  public async updateClass(updateClassdto: UpdateClassdto) {
+  public async updateClass(updateClassdto: any) {
     const { id, name, location } = updateClassdto;
     try {
       const classrom = await this.classroomRepository.findOne({

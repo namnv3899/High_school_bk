@@ -18,16 +18,16 @@ export class Classroom {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   location: string;
 
-  @Column()
+  @Column({ nullable: true })
   startYear: number;
 
-  @Column()
+  @Column({ nullable: true })
   endYear: number;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })

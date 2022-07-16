@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, MinLength } from 'class-validator';
 
 export enum Role {
   student = 'Student',
@@ -20,8 +19,6 @@ export class LoginDto {
   email: string;
 
   @ApiProperty({ example: 'admin123' })
-  @MinLength(6)
-  @IsNotEmpty()
   password: string;
 }
 
@@ -30,7 +27,5 @@ export class AdminRegisterDto {
   username: string;
 
   @ApiProperty({ example: 'admin123' })
-  @MinLength(6)
-  @IsNotEmpty()
   password: string;
 }
