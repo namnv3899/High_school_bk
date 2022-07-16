@@ -27,6 +27,7 @@ export class StudentsService {
         id: studentRegisterdto.classId,
       });
       const student = new Student();
+      student.classId = classroom.id;
       student.username = studentRegisterdto.username;
       student.email = studentRegisterdto.email;
       student.password = bcrypt.hashSync(`${studentRegisterdto.password}`, 10);

@@ -18,6 +18,8 @@ export class Facility {
   price: number;
 
   @Column()
+  total: number;
+  @Column()
   location: string;
 
   @Column()
