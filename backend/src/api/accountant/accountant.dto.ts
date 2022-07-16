@@ -8,11 +8,7 @@ import {
 } from 'class-validator';
 
 export class AccountantRegisterDto {
-  @ApiProperty()
-  @IsNotEmpty()
-  salaryId: number;
-
-  @ApiProperty({ example: 'Iris123' })
+  @ApiProperty({ example: 'nam' })
   @IsNotEmpty()
   @IsString()
   @MaxLength(40)
@@ -24,29 +20,29 @@ export class AccountantRegisterDto {
   @MaxLength(40)
   name: string;
 
-  @ApiProperty({ example: 'iris123@gmail.com' })
+  @ApiProperty({ example: 'nam@gmail.com' })
   @IsNotEmpty()
   @IsEmail()
   email: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'nam123' })
   @MinLength(6)
   @IsNotEmpty()
   password: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'male' })
   @IsNotEmpty()
   sex: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: '1943-09-03' })
   @IsNotEmpty()
   dateOfBirth: Date;
 
-  @ApiProperty()
+  @ApiProperty({ example: '2020-02-19' })
   @IsNotEmpty()
   startWorking: Date;
 
-  @ApiProperty()
+  @ApiProperty({ example: '2021-02-19' })
   @IsNotEmpty()
   endWorking: Date;
 

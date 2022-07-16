@@ -26,10 +26,12 @@ export class AccountantService {
         `${accountantRegisterDto.password}`,
         10,
       );
+      accountant.name = accountantRegisterDto.name;
+      accountant.sex = accountantRegisterDto.sex;
       accountant.dateOfBirth = accountantRegisterDto.dateOfBirth;
       accountant.startWorking = accountantRegisterDto.startWorking;
       accountant.endWorking = accountantRegisterDto.endWorking;
-
+      accountant.phone = Number(accountantRegisterDto.phone);
       const rs = await this.accountantRepository.save(accountant);
       return rs;
     } catch (error) {

@@ -15,9 +15,6 @@ export class Accountant {
   id: number;
 
   @Column()
-  salaryId: number;
-
-  @Column()
   username: string;
 
   @Column()
@@ -44,6 +41,9 @@ export class Accountant {
   @Column()
   endWorking: Date;
 
+  @Column({ nullable: true })
+  tokenVerify: string;
+
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
   createdAt: Date;
 
@@ -64,8 +64,11 @@ export class Admin {
   username: string;
 
   @Column()
+<<<<<<< HEAD
   email: string;
 
   @Column()
+=======
+>>>>>>> 852b878429ba4f25bbb6e0d22d0724a86807ca98
   password: string;
 }

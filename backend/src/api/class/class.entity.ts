@@ -30,9 +30,6 @@ export class Classroom {
   @Column()
   endYear: number;
 
-  @Column()
-  facilityId: number;
-
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
   createdAt: Date;
 

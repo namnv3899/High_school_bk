@@ -13,45 +13,17 @@ export class CreateClassdto {
   @IsString()
   location: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 2020 })
   @IsNotEmpty()
   startYear: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 2023 })
   @IsNotEmpty()
   endYear: number;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  facilityId: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  role: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  subjectId: number;
-
-  @ApiProperty()
+  @ApiProperty({ example: 20201 })
   @IsNotEmpty()
   semester: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  lesson: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  sesionOfDay: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  DayOfWeek: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  schoolYear: number;
 }
 
 export class TimetableDto {
@@ -122,9 +94,6 @@ export class UpdateClassdto {
   @ApiProperty()
   id: number;
 
-  @ApiProperty()
-  studentId: number;
-
   @ApiProperty({ example: '11A2' })
   name: string;
 
@@ -136,30 +105,6 @@ export class UpdateClassdto {
 
   @ApiProperty()
   endYear: number;
-
-  @ApiProperty()
-  facilityId: number;
-
-  @ApiProperty()
-  role: string;
-
-  @ApiProperty()
-  subjectId: number;
-
-  @ApiProperty()
-  semester: number;
-
-  @ApiProperty()
-  lesson: number;
-
-  @ApiProperty()
-  sesionOfDay: string;
-
-  @ApiProperty()
-  DayOfWeek: string;
-
-  @ApiProperty()
-  schoolYear: number;
 }
 
 export class GetOneClassdto {
@@ -169,7 +114,7 @@ export class GetOneClassdto {
 }
 
 export class SearchClassdto {
-  @ApiProperty({ example: 'Nam', nullable: true })
+  @ApiProperty({ example: '11A2', nullable: true })
   name: string;
 
   @ApiProperty({ nullable: true })

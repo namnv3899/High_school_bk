@@ -2,54 +2,54 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
 export class CreateSalaryDto {
-  @ApiProperty()
+  @ApiProperty({ example: 1 })
   @IsNotEmpty()
   teacherId: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 1 })
   @IsNotEmpty()
   accountantId: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: '2020-02-19' })
   @IsNotEmpty()
   payday: Date;
 
-  @ApiProperty()
+  @ApiProperty({ example: 20 })
   @IsNotEmpty()
   totalSalaryDays: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 3 })
   @IsNotEmpty()
   monthOfYear: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 1 })
   @IsNotEmpty()
-  yearsSeniority: Date;
+  yearsSeniority: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 5000000 })
   @IsNotEmpty()
   salaryOfDay: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 300000 })
   @IsNotEmpty()
   senioritySalary: number;
 }
 
 export class GetOneSalaryDto {
-  @ApiProperty()
+  @ApiProperty({ example: 1 })
   @IsNotEmpty()
   teacherId: number;
 }
 
 export class UpdateSalaryDto {
-  @ApiProperty()
+  @ApiProperty({ example: 1 })
   @IsNotEmpty()
   teacherId: number;
 }
 
 export class SearchSalaryDto {
-  @ApiProperty({ example: 'Nam', nullable: true })
-  name: string;
+  @ApiProperty({ example: 'Hung', nullable: true })
+  teacherName: string;
 
   @ApiProperty({ nullable: true })
   take: number;

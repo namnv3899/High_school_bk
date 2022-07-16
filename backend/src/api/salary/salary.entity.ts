@@ -26,6 +26,9 @@ export class Salary {
   monthOfYear: number;
 
   @Column()
+  techerName: string;
+
+  @Column()
   payDay: Date;
 
   @Column()

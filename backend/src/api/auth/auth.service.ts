@@ -31,7 +31,6 @@ export class AuthService {
   public async adminRegister(adminRegisterDto: AdminRegisterDto) {
     const admin = new Admin();
     try {
-      admin.email = adminRegisterDto.email;
       admin.username = adminRegisterDto.username;
       admin.password = bcrypt.hashSync(`${adminRegisterDto.password}`, 10);
       const rs = await this.adminRepository.save(admin);
@@ -50,7 +49,7 @@ export class AuthService {
       switch (role) {
         case Role.admin:
           user = await this.adminRepository.findOne({
-            where: [{ email }, { username }],
+            where: [{ username }],
           });
           if (!user) {
             throw new BadRequestException('Email or username wrong');

@@ -28,7 +28,8 @@ export class FacilityService {
       facility.name = createFacilitydto.name;
       facility.price = createFacilitydto.price;
       facility.classroom = classroom;
-      facility.location = createFacilitydto.location;
+      facility.classId = createFacilitydto.classId;
+      facility.location = classroom.location;
       facility.timeIn = createFacilitydto.timeIn;
       facility.status = createFacilitydto.status;
 
