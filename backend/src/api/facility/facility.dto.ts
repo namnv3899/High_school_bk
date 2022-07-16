@@ -20,6 +20,10 @@ export class CreateFacilitydto {
   status: string;
 }
 
+export class UpdateFacilitydtoParam {
+  @ApiProperty()
+  id: string;
+}
 export class UpdateFacilitydto {
   @ApiProperty()
   name: string;

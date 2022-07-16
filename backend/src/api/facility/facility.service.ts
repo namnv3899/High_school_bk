@@ -26,6 +26,7 @@ export class FacilityService {
       facility.location = createFacilitydto.location;
       facility.timeIn = createFacilitydto.timeIn;
       facility.status = createFacilitydto.status;
+      facility.total = createFacilitydto.total;
 
       const rs = await this.facilityRepository.save(facility);
       return rs;

@@ -22,6 +22,7 @@ import {
   DeleteFacilitydto,
   GetOneFacilitydto,
   SearchFacilitydto,
+  UpdateFacilitydtoParam,
 } from './facility.dto';
 
 @ApiTags('Facility')
@@ -95,11 +96,11 @@ export class FacilityController {
   @ApiResponse({ status: 200, description: 'Updated' })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  public async updateInfor(
+  public async updateFacility(
     @Body() updateFacilitydto: UpdateFacilitydto,
     @Res() res,
     @Req() req,
-    @Param() param,
+    @Param() param: UpdateFacilitydtoParam,
   ) {
     try {
       const data = await this.facilityService.updateFacility({
