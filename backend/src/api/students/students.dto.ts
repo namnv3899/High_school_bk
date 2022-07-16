@@ -175,12 +175,6 @@ export class UpdateStudentdto {
 export class SearchStudentdto {
   @ApiProperty({ example: 'Nam', nullable: true })
   name: string;
-
-  @ApiProperty({ nullable: true })
-  take: number;
-
-  @ApiProperty({ nullable: true })
-  page: number;
 }
 
 export class DeleteStudentdto {

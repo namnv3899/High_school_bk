@@ -78,12 +78,6 @@ export class GetOneTeacherdto {
 export class SearchTeacherdto {
   @ApiProperty({ example: 'Nam', nullable: true })
   name: string;
-
-  @ApiProperty({ nullable: true })
-  take: number;
-
-  @ApiProperty({ nullable: true })
-  page: number;
 }
 
 export class DeleteTeacherdto {

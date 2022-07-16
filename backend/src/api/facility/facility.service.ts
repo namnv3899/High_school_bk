@@ -34,17 +34,12 @@ export class FacilityService {
     }
   }
   public async searchFacility(searchFacilitydto: SearchFacilitydto) {
-    const take = searchFacilitydto.take || 10;
-    const page = searchFacilitydto.page || 1;
-    const skip = (page - 1) * take;
     const filter = searchFacilitydto.name || '';
 
     try {
       const [result, total] = await this.facilityRepository.findAndCount({
         where: { name: ILike(`%${filter}%`) },
         order: { name: 'ASC' },
-        take: take,
-        skip: skip,
       });
 
       return {

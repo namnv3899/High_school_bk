@@ -39,17 +39,12 @@ export class AccountantService {
   }
 
   public async searchAccountant(searchAccountantDto: SearchAccountantDto) {
-    const take = searchAccountantDto.take || 10;
-    const page = searchAccountantDto.page || 1;
-    const skip = (page - 1) * take;
     const filter = searchAccountantDto.name || '';
 
     try {
       const [result, total] = await this.accountantRepository.findAndCount({
         where: { username: ILike(`%${filter}%`) },
         order: { username: 'ASC' },
-        take: take,
-        skip: skip,
       });
 
       return {

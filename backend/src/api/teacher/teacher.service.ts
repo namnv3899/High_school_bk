@@ -38,17 +38,12 @@ export class TeacherService {
   }
 
   public async searchTeacher(searchTeacherdto: SearchTeacherdto) {
-    const take = searchTeacherdto.take || 10;
-    const page = searchTeacherdto.page || 1;
-    const skip = (page - 1) * take;
     const filter = searchTeacherdto.name || '';
 
     try {
       const [result, total] = await this.teacherRepository.findAndCount({
         where: { username: ILike(`%${filter}%`) },
         order: { username: 'ASC' },
-        take: take,
-        skip: skip,
       });
 
       return {

@@ -54,17 +54,12 @@ export class StudentsService {
   }
 
   public async searchStudent(searchStudentdto: SearchStudentdto) {
-    const take = searchStudentdto.take || 10;
-    const page = searchStudentdto.page || 1;
-    const skip = (page - 1) * take;
     const filter = searchStudentdto.name || '';
 
     try {
       const [result, total] = await this.studentRepository.findAndCount({
         where: { username: ILike(`%${filter}%`) },
         order: { username: 'ASC' },
-        take: take,
-        skip: skip,
       });
 
       return {

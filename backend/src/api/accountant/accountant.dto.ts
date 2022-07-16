@@ -68,12 +68,6 @@ export class GetOneAccountantDto {
 export class SearchAccountantDto {
   @ApiProperty({ example: 'Nam', nullable: true })
   name: string;
-
-  @ApiProperty({ nullable: true })
-  take: number;
-
-  @ApiProperty({ nullable: true })
-  page: number;
 }
 
 export class DeleteAccountantDto {
