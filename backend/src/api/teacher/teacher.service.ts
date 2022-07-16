@@ -23,6 +23,8 @@ export class TeacherService {
       teacher.email = teacherRegisterdto.email;
       teacher.password = bcrypt.hashSync(`$teacherRegisterdto.password}`, 10);
       teacher.address = teacherRegisterdto.address;
+      teacher.salary = teacherRegisterdto.salary;
+      teacher.subject = teacherRegisterdto.subject;
       teacher.dateOfBirth = teacherRegisterdto.dateOfBirth;
       teacher.startWorking = teacherRegisterdto.startWorking;
       teacher.endWorking = teacherRegisterdto.endWorking;

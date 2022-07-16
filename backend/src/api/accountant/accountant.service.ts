@@ -27,6 +27,7 @@ export class AccountantService {
       );
       accountant.name = accountantRegisterDto.name;
       accountant.sex = accountantRegisterDto.sex;
+      accountant.address = accountantRegisterDto.address;
       accountant.dateOfBirth = accountantRegisterDto.dateOfBirth;
       accountant.startWorking = accountantRegisterDto.startWorking;
       accountant.endWorking = accountantRegisterDto.endWorking;
