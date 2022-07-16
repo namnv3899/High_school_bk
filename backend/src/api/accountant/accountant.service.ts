@@ -19,12 +19,12 @@ export class AccountantService {
   public async createAccountant(accountantRegisterDto: AccountantRegisterDto) {
     try {
       const accountant = new Accountant();
-      accountant.username = accountantRegisterDto.username;
-      accountant.email = accountantRegisterDto.email;
       accountant.password = bcrypt.hashSync(
         `${accountantRegisterDto.password}`,
         10,
       );
+      accountant.username = accountantRegisterDto.username;
+      accountant.email = accountantRegisterDto.email;
       accountant.name = accountantRegisterDto.name;
       accountant.sex = accountantRegisterDto.sex;
       accountant.address = accountantRegisterDto.address;
@@ -80,7 +80,14 @@ export class AccountantService {
       const accountant = await this.accountantRepository.findOne({
         where: { id },
       });
-
+      accountant.username = data.username;
+      accountant.email = data.email;
+      accountant.name = data.name;
+      accountant.sex = data.sex;
+      accountant.address = data.address;
+      accountant.dateOfBirth = data.dateOfBirth;
+      accountant.startWorking = data.startWorking;
+      accountant.endWorking = data.endWorking;
       const rs = await this.accountantRepository.save(accountant);
       return rs;
     } catch (error) {

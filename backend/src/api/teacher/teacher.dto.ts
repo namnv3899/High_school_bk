@@ -39,17 +39,14 @@ export class TeacherRegisterdto {
 }
 
 export class UpdateTeacherdto {
-  @ApiProperty({ example: 'Iris123333' })
+  @ApiProperty({ example: 'Nam123' })
   username: string;
 
   @ApiProperty({ example: 'Nguyen Van Nam 2' })
   name: string;
 
-  @ApiProperty({ example: 'iris12223@gmail.com' })
+  @ApiProperty({ example: 'Nam@gmail.com' })
   email: string;
-
-  @ApiProperty()
-  password: string;
 
   @ApiProperty()
   sex: string;

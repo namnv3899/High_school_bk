@@ -19,10 +19,10 @@ export class TeacherService {
   public async createTeacher(teacherRegisterdto: TeacherRegisterdto) {
     try {
       const teacher = new Teacher();
-      teacher.username = teacherRegisterdto.username;
-      teacher.email = teacherRegisterdto.email;
       teacher.password = bcrypt.hashSync(`$teacherRegisterdto.password}`, 10);
       teacher.address = teacherRegisterdto.address;
+      teacher.username = teacherRegisterdto.username;
+      teacher.email = teacherRegisterdto.email;
       teacher.salary = teacherRegisterdto.salary;
       teacher.subject = teacherRegisterdto.subject;
       teacher.dateOfBirth = teacherRegisterdto.dateOfBirth;
@@ -75,12 +75,21 @@ export class TeacherService {
   }
 
   public async updateTeacher(updateTeacherdto: any) {
-    const { id, username, email } = updateTeacherdto;
+    const { id } = updateTeacherdto;
     try {
       const teacher = await this.teacherRepository.findOne({ where: { id } });
-      teacher.email = email;
-      teacher.username = username;
 
+      teacher.address = updateTeacherdto.address;
+      teacher.username = updateTeacherdto.username;
+      teacher.email = updateTeacherdto.email;
+      teacher.salary = updateTeacherdto.salary;
+      teacher.subject = updateTeacherdto.subject;
+      teacher.dateOfBirth = updateTeacherdto.dateOfBirth;
+      teacher.startWorking = updateTeacherdto.startWorking;
+      teacher.endWorking = updateTeacherdto.endWorking;
+      teacher.phone = updateTeacherdto.phone;
+      teacher.name = updateTeacherdto.name;
+      teacher.sex = updateTeacherdto.sex;
       const rs = await this.teacherRepository.save(teacher);
       return rs;
     } catch (error) {

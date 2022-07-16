@@ -38,26 +38,32 @@ export class UpdateAccountantDtoParam {
 }
 
 export class UpdateAccountantDto {
-  @ApiProperty()
+  @ApiProperty({ example: 'nam' })
   username: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Nguyen Van Nam' })
   name: string;
 
-  @ApiProperty()
-  address: string;
-
-  @ApiProperty()
+  @ApiProperty({ example: 'nam@gmail.com' })
   email: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'male' })
   sex: string;
+
+  @ApiProperty({ example: '123 Hoang Mai, Ha Noi' })
+  address: string;
+
+  @ApiProperty({ example: '1943-09-03' })
+  dateOfBirth: Date;
+
+  @ApiProperty({ example: '2020-02-19' })
+  startWorking: Date;
+
+  @ApiProperty({ example: '2021-02-19' })
+  endWorking: Date;
 
   @ApiProperty()
   phone: number;
-
-  @ApiProperty()
-  dateOfBirth: Date;
 }
 
 export class GetOneAccountantDto {
