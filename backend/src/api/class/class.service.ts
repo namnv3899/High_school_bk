@@ -84,8 +84,6 @@ export class ClassService {
       const classTeacher = new ClassTeacher();
       classTeacher.id = assignClassTeacherDto.id;
       classTeacher.role = assignClassTeacherDto.role;
-      classTeacher.schoolYear = assignClassTeacherDto.schoolYear;
-      classTeacher.semester = assignClassTeacherDto.semester;
       classTeacher.teacher = teacher;
       classTeacher.classroom = classroom;
 
@@ -97,17 +95,12 @@ export class ClassService {
   }
 
   public async searchClass(searchClassdto: SearchClassdto) {
-    const take = searchClassdto.take || 10;
-    const page = searchClassdto.page || 1;
-    const skip = (page - 1) * take;
     const filter = searchClassdto.name || '';
 
     try {
       const [result, total] = await this.classroomRepository.findAndCount({
         where: { name: ILike(`%${filter}%`) },
         order: { name: 'ASC' },
-        take: take,
-        skip: skip,
       });
 
       return {

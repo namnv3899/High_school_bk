@@ -23,25 +23,10 @@ export class Salary {
   accountantId: number;
 
   @Column()
-  monthOfYear: number;
+  salary: number;
 
   @Column()
   techerName: string;
-
-  @Column()
-  payDay: Date;
-
-  @Column()
-  totalSalaryDays: number;
-
-  @Column()
-  salaryOfDay: number;
-
-  @Column({ nullable: true })
-  yearsSeniority: number;
-
-  @Column({ nullable: true })
-  senioritySalary: number;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
   createdAt: Date;

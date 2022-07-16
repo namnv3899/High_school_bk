@@ -2,10 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
 export class CreateFacilitydto {
-  @ApiProperty()
-  @IsNotEmpty()
-  classId: number;
-
   @ApiProperty({ example: 'Seas' })
   @IsNotEmpty()
   @IsString()
@@ -27,10 +23,6 @@ export class CreateFacilitydto {
   @ApiProperty()
   @IsNotEmpty()
   timeIn: Date;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  type: string;
 
   @ApiProperty()
   @IsNotEmpty()

@@ -37,7 +37,6 @@ export class StudentsService {
       student.address = studentRegisterdto.address;
       student.phone = studentRegisterdto.phone;
       student.startStudying = studentRegisterdto.startStudying;
-      student.endStudying = studentRegisterdto.endStudying;
       student.fatherName = studentRegisterdto.fatherName;
       student.fatherJob = studentRegisterdto.fatherJob;
       student.fatherPhone = studentRegisterdto.fatherPhone;

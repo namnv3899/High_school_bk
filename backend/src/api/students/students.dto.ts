@@ -56,10 +56,6 @@ export class StudentRegisterdto {
 
   @ApiProperty()
   @IsNotEmpty()
-  endStudying: Date;
-
-  @ApiProperty()
-  @IsNotEmpty()
   fatherName: string;
 
   @ApiProperty()
@@ -174,9 +170,6 @@ export class UpdateStudentdto {
 
   @ApiProperty()
   schoolYear: number;
-
-  @ApiProperty()
-  semester: number;
 }
 
 export class SearchStudentdto {

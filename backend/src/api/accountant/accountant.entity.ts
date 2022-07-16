@@ -64,11 +64,5 @@ export class Admin {
   username: string;
 
   @Column()
-<<<<<<< HEAD
-  email: string;
-
-  @Column()
-=======
->>>>>>> 852b878429ba4f25bbb6e0d22d0724a86807ca98
   password: string;
 }

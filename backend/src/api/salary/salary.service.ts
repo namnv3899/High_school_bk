@@ -5,7 +5,6 @@ import { Salary } from './salary.entity';
 import {
   GetOneSalaryDto,
   CreateSalaryDto,
-  SearchSalaryDto,
   UpdateSalaryDto,
 } from './salary.dto';
 import { TeacherService } from '../teacher/teacher.service';
@@ -36,11 +35,7 @@ export class SalaryService {
       salary.techerName = teacher.name;
       salary.teacher = teacher;
       salary.accountant = accountant;
-      salary.monthOfYear = createSalaryDto.monthOfYear;
-      salary.senioritySalary = createSalaryDto.senioritySalary;
-      salary.totalSalaryDays = createSalaryDto.totalSalaryDays;
-      salary.payDay = createSalaryDto.payday;
-      salary.salaryOfDay = createSalaryDto.salaryOfDay;
+      salary.salary = createSalaryDto.salary;
 
       const rs = this.salaryRepository.save(salary);
       return rs;
@@ -49,24 +44,11 @@ export class SalaryService {
     }
   }
 
-  public async searchSalary(searchSalaryDto: SearchSalaryDto) {
-    const take = searchSalaryDto.take || 10;
-    const page = searchSalaryDto.page || 1;
-    const skip = (page - 1) * take;
-    // const filter = searchSalaryDto.name || '';
-
+  public async searchSalary() {
     try {
-      const [result, total] = await this.salaryRepository.findAndCount({
-        // where: { username: ILike(`%${filter}%`) },
-        // order: { username: 'ASC' },
-        take: take,
-        skip: skip,
-      });
+      const rs = await this.salaryRepository.find();
 
-      return {
-        data: result,
-        count: total,
-      };
+      return rs;
     } catch (error) {
       throw error;
     }

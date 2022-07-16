@@ -50,7 +50,7 @@ export class SalaryController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async findAll(@Query() searchSalaryDto: SearchSalaryDto, @Res() res) {
     try {
-      const data = await this.salaryService.searchSalary(searchSalaryDto);
+      const data = await this.salaryService.searchSalary();
       res.json({ data });
     } catch (error) {
       throw error;

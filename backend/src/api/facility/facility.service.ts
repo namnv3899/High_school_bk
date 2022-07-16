@@ -21,15 +21,10 @@ export class FacilityService {
 
   public async createFacility(createFacilitydto: CreateFacilitydto) {
     try {
-      const classroom = await this.classService.findOneClass({
-        id: createFacilitydto.classId,
-      });
       const facility = new Facility();
       facility.name = createFacilitydto.name;
       facility.price = createFacilitydto.price;
-      facility.classroom = classroom;
-      facility.classId = createFacilitydto.classId;
-      facility.location = classroom.location;
+      facility.location = createFacilitydto.location;
       facility.timeIn = createFacilitydto.timeIn;
       facility.status = createFacilitydto.status;
 

@@ -20,10 +20,6 @@ export class CreateClassdto {
   @ApiProperty({ example: 2023 })
   @IsNotEmpty()
   endYear: number;
-
-  @ApiProperty({ example: 20201 })
-  @IsNotEmpty()
-  semester: number;
 }
 
 export class TimetableDto {
@@ -80,14 +76,6 @@ export class AssignClassTeacherDto {
   @ApiProperty()
   @IsNotEmpty()
   role: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  semester: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  schoolYear: number;
 }
 
 export class UpdateClassdto {
@@ -116,12 +104,6 @@ export class GetOneClassdto {
 export class SearchClassdto {
   @ApiProperty({ example: '11A2', nullable: true })
   name: string;
-
-  @ApiProperty({ nullable: true })
-  take: number;
-
-  @ApiProperty({ nullable: true })
-  page: number;
 }
 
 export class DeleteClassdto {
