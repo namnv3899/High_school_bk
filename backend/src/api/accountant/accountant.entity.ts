@@ -20,7 +20,7 @@ export class Accountant {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   address: string;
 
   @Column()
@@ -43,9 +43,6 @@ export class Accountant {
 
   @Column({ nullable: true })
   endWorking: Date;
-
-  @Column()
-  tokenVerify: string;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
   createdAt: Date;

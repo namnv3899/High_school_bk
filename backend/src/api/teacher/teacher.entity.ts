@@ -31,6 +31,12 @@ export class Teacher {
   @Column()
   phone: number;
 
+  @Column({ nullable: true })
+  salary: number;
+
+  @Column({ nullable: true })
+  subject: number;
+
   @Column()
   address: string;
 
@@ -53,7 +59,7 @@ export class Teacher {
   updatedAt: Date;
 
   @OneToOne(() => Salary, (salary) => salary.teacher)
-  salary: Salary;
+  salarys: Salary;
 
   @OneToMany(() => ClassTeacher, (classTeachers) => classTeachers.teacher)
   @JoinColumn()

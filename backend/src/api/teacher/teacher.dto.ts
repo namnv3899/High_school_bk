@@ -11,6 +11,12 @@ export class TeacherRegisterdto {
   email: string;
 
   @ApiProperty()
+  salary: number;
+
+  @ApiProperty()
+  subject: number;
+
+  @ApiProperty()
   password: string;
 
   @ApiProperty()
@@ -33,9 +39,6 @@ export class TeacherRegisterdto {
 }
 
 export class UpdateTeacherdto {
-  @ApiProperty({ example: '001' })
-  id: number;
-
   @ApiProperty({ example: 'Iris123333' })
   username: string;
 

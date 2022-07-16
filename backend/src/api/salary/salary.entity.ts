@@ -37,7 +37,7 @@ export class Salary {
   @ManyToOne(() => Accountant, (accountant) => accountant.salaries)
   accountant: Accountant;
 
-  @OneToOne(() => Teacher, (teacher) => teacher.salary)
+  @OneToOne(() => Teacher, (teacher) => teacher.salarys)
   @JoinColumn()
   teacher: Teacher;
 }

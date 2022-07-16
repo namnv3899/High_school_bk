@@ -4,7 +4,6 @@ import { ILike, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Student, Subject } from './students.entity';
 import {
-  UpdateStudentdto,
   DeleteStudentdto,
   SearchStudentdto,
   StudentRegisterdto,
@@ -89,7 +88,7 @@ export class StudentsService {
     }
   }
 
-  public async updateStudent(updateStudentdto: UpdateStudentdto) {
+  public async updateStudent(updateStudentdto: any) {
     const { id, username, email } = updateStudentdto;
     try {
       const student = await this.studentRepository.findOne({ where: { id } });

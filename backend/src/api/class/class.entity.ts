@@ -9,7 +9,6 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { Facility } from '../facility/facility.entity';
 import { Student, Subject } from '../students/students.entity';
 import { Teacher } from '../teacher/teacher.entity';
 
@@ -47,10 +46,6 @@ export class Classroom {
   @OneToMany(() => ClassSubject, (classSubjects) => classSubjects.classroom)
   @JoinColumn()
   classSubjects: ClassSubject[];
-
-  @OneToMany(() => Facility, (facilities) => facilities.classroom)
-  @JoinColumn()
-  facilities: Facility[];
 }
 
 @Entity({ name: 'ClassSubject' })

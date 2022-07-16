@@ -22,6 +22,7 @@ import {
   DeleteAccountantDto,
   SearchAccountantDto,
   UpdateAccountantDto,
+  UpdateAccountantDtoParam,
 } from './accountant.dto';
 
 @ApiTags('Accountant')
@@ -98,7 +99,7 @@ export class AccountantController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Patch()
+  @Patch(':id')
   @ApiResponse({ status: 200, description: 'Updated' })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -106,12 +107,12 @@ export class AccountantController {
     @Body() updateAccountantDto: UpdateAccountantDto,
     @Res() res,
     @Req() req,
+    @Param() param: UpdateAccountantDtoParam,
   ) {
-    const { id } = req.user;
     try {
       const data = await this.accountantService.updateAccountant({
         ...updateAccountantDto,
-        id,
+        param,
       });
 
       res.json({ data });

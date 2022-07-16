@@ -7,7 +7,6 @@ import {
   AccountantRegisterDto,
   DeleteAccountantDto,
   SearchAccountantDto,
-  UpdateAccountantDto,
 } from './accountant.dto';
 
 @Injectable()
@@ -79,8 +78,8 @@ export class AccountantService {
     }
   }
 
-  public async updateAccountant(updateAccountantDto: UpdateAccountantDto) {
-    const { id } = updateAccountantDto;
+  public async updateAccountant(data: any) {
+    const { id } = data;
     try {
       const accountant = await this.accountantRepository.findOne({
         where: { id },

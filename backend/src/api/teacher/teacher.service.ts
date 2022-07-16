@@ -6,7 +6,6 @@ import { Teacher } from './teacher.entity';
 import {
   TeacherRegisterdto,
   SearchTeacherdto,
-  UpdateTeacherdto,
   DeleteTeacherdto,
 } from './teacher.dto';
 
@@ -78,7 +77,7 @@ export class TeacherService {
     }
   }
 
-  public async updateTeacher(updateTeacherdto: UpdateTeacherdto) {
+  public async updateTeacher(updateTeacherdto: any) {
     const { id, username, email } = updateTeacherdto;
     try {
       const teacher = await this.teacherRepository.findOne({ where: { id } });

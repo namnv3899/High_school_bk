@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
 import { Facility } from './facility.entity';
 import {
-  UpdateFacilitydto,
   CreateFacilitydto,
   DeleteFacilitydto,
   GetOneFacilitydto,
@@ -70,12 +69,14 @@ export class FacilityService {
       throw error;
     }
   }
-  public async updateFacility(updateFacilitydto: UpdateFacilitydto) {
+  public async updateFacility(updateFacilitydto: any) {
     const { id } = updateFacilitydto;
     try {
-      const user = await this.facilityRepository.findOne({ where: { id } });
+      const facility = await this.facilityRepository.findOne({ where: { id } });
+      facility.price = updateFacilitydto.price;
+      facility.location = updateFacilitydto.location;
 
-      const rs = await this.facilityRepository.save(user);
+      const rs = await this.facilityRepository.save(facility);
       return rs;
     } catch (error) {
       throw error;

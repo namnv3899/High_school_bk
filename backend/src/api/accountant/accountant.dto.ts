@@ -32,9 +32,32 @@ export class AccountantRegisterDto {
   phone: number;
 }
 
-export class UpdateAccountantDto {
+export class UpdateAccountantDtoParam {
   @ApiProperty()
   id: number;
+}
+
+export class UpdateAccountantDto {
+  @ApiProperty()
+  username: string;
+
+  @ApiProperty()
+  name: string;
+
+  @ApiProperty()
+  address: string;
+
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  sex: string;
+
+  @ApiProperty()
+  phone: number;
+
+  @ApiProperty()
+  dateOfBirth: Date;
 }
 
 export class GetOneAccountantDto {

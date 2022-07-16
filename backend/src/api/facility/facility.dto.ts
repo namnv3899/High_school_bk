@@ -22,7 +22,13 @@ export class CreateFacilitydto {
 
 export class UpdateFacilitydto {
   @ApiProperty()
-  id: number;
+  name: string;
+
+  @ApiProperty()
+  price: number;
+
+  @ApiProperty()
+  location: string;
 }
 
 export class GetOneFacilitydto {
