@@ -46,6 +46,7 @@ export class StudentsService {
       student.motherJob = studentRegisterdto.motherJob;
       student.motherDateOfBirth = studentRegisterdto.motherDateOfBirth;
       student.motherPhone = studentRegisterdto.motherPhone;
+      student.motherJobAddress = studentRegisterdto.motherJobAddress;
       student.classroom = classroom;
       const rs = await this.studentRepository.save(student);
       return rs;

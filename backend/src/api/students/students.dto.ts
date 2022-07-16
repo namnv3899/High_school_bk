@@ -29,68 +29,68 @@ export class StudentRegisterdto {
   @IsEmail()
   email: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Nam123' })
   @MinLength(6)
   @IsNotEmpty()
   password: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Nam123' })
   @IsNotEmpty()
   sex: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: '2021-02-19' })
   @IsNotEmpty()
   dateOfBirth: Date;
 
-  @ApiProperty()
+  @ApiProperty({ example: '2021-02-19' })
   @IsNotEmpty()
   address: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 243242473 })
   @IsNotEmpty()
   phone: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: '2021-02-19' })
   @IsNotEmpty()
   startStudying: Date;
 
-  @ApiProperty()
+  @ApiProperty({ example: '20rwtr9' })
   @IsNotEmpty()
   fatherName: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: '20rwtr9' })
   @IsNotEmpty()
   fatherJob: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 4324214 })
   @IsNotEmpty()
   fatherPhone: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: '1943-09-03' })
   @IsNotEmpty()
   fatherDateOfBirth: Date;
 
-  @ApiProperty()
+  @ApiProperty({ example: '31 ngo Duy Hung, tp Ha Noi' })
   @IsNotEmpty()
   fatherJobAddress: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Noi' })
   @IsNotEmpty()
   motherName: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'fsadfsdfi' })
   @IsNotEmpty()
   motherJob: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 243242473 })
   @IsNotEmpty()
   motherPhone: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: '1943-09-03' })
   @IsNotEmpty()
   motherDateOfBirth: Date;
 
-  @ApiProperty()
+  @ApiProperty({ example: '31 ngo Duy Hung, tp Ha Noi' })
   @IsNotEmpty()
   motherJobAddress: string;
 }

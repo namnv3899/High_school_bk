@@ -69,9 +69,12 @@ export class FacilityService {
     const { id } = updateFacilitydto;
     try {
       const facility = await this.facilityRepository.findOne({ where: { id } });
+      facility.name = updateFacilitydto.name;
       facility.price = updateFacilitydto.price;
       facility.location = updateFacilitydto.location;
-
+      facility.timeIn = updateFacilitydto.timeIn;
+      facility.status = updateFacilitydto.status;
+      facility.total = updateFacilitydto.total;
       const rs = await this.facilityRepository.save(facility);
       return rs;
     } catch (error) {
