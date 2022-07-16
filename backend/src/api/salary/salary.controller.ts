@@ -32,7 +32,7 @@ export class SalaryController {
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async createSalary(
-    @Query() createSalaryDto: CreateSalaryDto,
+    @Body() createSalaryDto: CreateSalaryDto,
     @Res() res,
   ) {
     try {

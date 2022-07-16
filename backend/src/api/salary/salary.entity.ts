@@ -16,16 +16,16 @@ export class Salary {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
+  @Column()
   teacherId: number;
 
-  @Column({ nullable: true })
+  @Column()
   accountantId: number;
 
-  @Column({ nullable: true })
+  @Column()
   salary: number;
 
-  @Column({ nullable: true })
+  @Column()
   techerName: string;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })

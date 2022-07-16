@@ -35,7 +35,7 @@ export class FacilityController {
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async createFacility(
-    @Query() createFacilitydto: CreateFacilitydto,
+    @Body() createFacilitydto: CreateFacilitydto,
     @Res() res,
   ) {
     try {

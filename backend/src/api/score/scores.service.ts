@@ -5,7 +5,6 @@ import { Subject } from '../students/students.entity';
 import { StudentsService } from '../students/students.service';
 import {
   CreateScoreDto,
-  UpdateScoreDto,
   GetScoreDto,
   AverageScoreDto,
   DeleteScoreDto,
@@ -50,7 +49,7 @@ export class ScoreService {
     }
   }
 
-  public async updateScore(updateScoreDto: UpdateScoreDto) {
+  public async updateScore(updateScoreDto: any) {
     try {
       const score = await this.scoreRepository.findOne({
         where: { id: updateScoreDto.id },

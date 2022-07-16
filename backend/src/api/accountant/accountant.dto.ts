@@ -16,6 +16,9 @@ export class AccountantRegisterDto {
   @ApiProperty({ example: 'male' })
   sex: string;
 
+  @ApiProperty({ example: '123 Hoang Mai, Ha Noi' })
+  address: string;
+
   @ApiProperty({ example: '1943-09-03' })
   dateOfBirth: Date;
 

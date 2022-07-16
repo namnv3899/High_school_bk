@@ -68,6 +68,12 @@ export class UpdateClassdto {
 
   @ApiProperty({ example: 'B3_102' })
   location: string;
+
+  @ApiProperty({ example: 2020 })
+  startYear: number;
+
+  @ApiProperty({ example: 2023 })
+  endYear: number;
 }
 
 export class GetOneClassdto {

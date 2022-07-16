@@ -7,6 +7,8 @@ import {
   UseGuards,
   Post,
   Delete,
+  Body,
+  Param,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -16,6 +18,7 @@ import {
   UpdateScoreDto,
   GetScoreDto,
   DeleteScoreDto,
+  UpdateScoreDtoParam,
 } from './scores.dto';
 import { ScoreService } from './scores.service';
 
@@ -29,10 +32,7 @@ export class ScoreController {
   @Post()
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  public async createScore(
-    @Query() createScoreDto: CreateScoreDto,
-    @Res() res,
-  ) {
+  public async createScore(@Body() createScoreDto: CreateScoreDto, @Res() res) {
     try {
       const data = await this.scoreService.createScore(createScoreDto);
       res.json({ data });
@@ -43,15 +43,19 @@ export class ScoreController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Patch()
+  @Patch(':id')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async updateScore(
-    @Query() updateScoreDto: UpdateScoreDto,
+    @Body() updateScoreDto: UpdateScoreDto,
     @Res() res,
+    @Param() param: UpdateScoreDtoParam,
   ) {
     try {
-      const data = await this.scoreService.updateScore(updateScoreDto);
+      const data = await this.scoreService.updateScore({
+        ...updateScoreDto,
+        param,
+      });
       res.json({ data });
     } catch (error) {
       throw error;
