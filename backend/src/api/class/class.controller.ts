@@ -36,10 +36,7 @@ export class ClassController {
   @Post()
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  public async createTeacher(
-    @Query() createClassdto: CreateClassdto,
-    @Res() res,
-  ) {
+  public async createClass(@Body() createClassdto: CreateClassdto, @Res() res) {
     try {
       const data = await this.classService.createClass(createClassdto);
       res.json({ data });
@@ -51,10 +48,7 @@ export class ClassController {
   @Post('timetable')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  public async createTimetable(
-    @Query() timetableDto: TimetableDto,
-    @Res() res,
-  ) {
+  public async createTimetable(@Body() timetableDto: TimetableDto, @Res() res) {
     try {
       const data = await this.classService.createTimetable(timetableDto);
       res.json({ data });
@@ -67,7 +61,7 @@ export class ClassController {
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async assignClassTeacher(
-    @Query() assignClassTeacherDto: AssignClassTeacherDto,
+    @Body() assignClassTeacherDto: AssignClassTeacherDto,
     @Res() res,
   ) {
     try {

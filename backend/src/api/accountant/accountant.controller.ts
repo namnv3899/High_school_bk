@@ -35,7 +35,7 @@ export class AccountantController {
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async createAccountant(
-    @Query() accountantRegisterDto: AccountantRegisterDto,
+    @Body() accountantRegisterDto: AccountantRegisterDto,
     @Res() res,
   ) {
     try {

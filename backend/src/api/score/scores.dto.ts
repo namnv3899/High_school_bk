@@ -35,10 +35,12 @@ export class CreateScoreDto {
   semester: number;
 }
 
-export class UpdateScoreDto {
+export class UpdateScoreDtoParam {
   @ApiProperty()
   id: number;
+}
 
+export class UpdateScoreDto {
   @ApiProperty()
   score15m1: number;
 
