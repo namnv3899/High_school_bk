@@ -84,6 +84,7 @@ export class AccountantService {
       accountant.email = data.email;
       accountant.name = data.name;
       accountant.sex = data.sex;
+      accountant.password = data.password;
       accountant.address = data.address;
       accountant.dateOfBirth = data.dateOfBirth;
       accountant.startWorking = data.startWorking;

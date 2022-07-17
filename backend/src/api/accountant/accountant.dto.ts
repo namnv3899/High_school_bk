@@ -44,6 +44,9 @@ export class UpdateAccountantDto {
   @ApiProperty({ example: 'Nguyen Van Nam' })
   name: string;
 
+  @ApiProperty({ example: 'nam234' })
+  password: string;
+
   @ApiProperty({ example: 'nam@gmail.com' })
   email: string;
 

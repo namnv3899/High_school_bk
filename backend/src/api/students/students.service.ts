@@ -92,6 +92,7 @@ export class StudentsService {
       student.email = email;
       student.username = username;
       student.sex = updateStudentdto.sex;
+      student.password = updateStudentdto.password;
       student.dateOfBirth = updateStudentdto.dateOfBirth;
       student.address = updateStudentdto.address;
       student.phone = updateStudentdto.phone;

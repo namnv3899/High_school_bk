@@ -82,11 +82,11 @@ export class UpdateStudentdto {
   @ApiProperty({ example: 'Nguyen Van Nam' })
   name: string;
 
+  @ApiProperty({ example: 'nam234' })
+  password: string;
+
   @ApiProperty({ example: 'iris123@gmail.com' })
   email: string;
-
-  @ApiProperty()
-  password: string;
 
   @ApiProperty()
   sex: string;
