@@ -104,45 +104,45 @@ export class ClassService {
   public async assignClassTeacher(
     assignClassTeacherDto: AssignClassTeacherDto,
   ) {
-    // console.log('timetableDto:', assignClassTeacherDto);
-    const data = [
-      assignClassTeacherDto.chuNhiem,
-      assignClassTeacherDto.toanHoc,
-      assignClassTeacherDto.nguVan,
-      assignClassTeacherDto.ngoaiNgu,
-      assignClassTeacherDto.sinhHoc,
-      assignClassTeacherDto.lichSu,
-      assignClassTeacherDto.diaLy,
-      assignClassTeacherDto.gdcd,
-      assignClassTeacherDto.theDuc,
-      assignClassTeacherDto.vatLy,
-      assignClassTeacherDto.hoaHoc,
-      assignClassTeacherDto.tinHoc,
-      assignClassTeacherDto.congNghe,
-    ];
+    console.log('timetableDto:', assignClassTeacherDto);
+    // const data = [
+    //   assignClassTeacherDto.chuNhiem,
+    //   assignClassTeacherDto.toanHoc,
+    //   assignClassTeacherDto.nguVan,
+    //   assignClassTeacherDto.ngoaiNgu,
+    //   assignClassTeacherDto.sinhHoc,
+    //   assignClassTeacherDto.lichSu,
+    //   assignClassTeacherDto.diaLy,
+    //   assignClassTeacherDto.gdcd,
+    //   assignClassTeacherDto.theDuc,
+    //   assignClassTeacherDto.vatLy,
+    //   assignClassTeacherDto.hoaHoc,
+    //   assignClassTeacherDto.tinHoc,
+    //   assignClassTeacherDto.congNghe,
+    // ];
     // console.log('data:', data);
 
     let result: any = [];
     try {
-      for (const index of data) {
+      for (const index in assignClassTeacherDto) {
         // console.log('INsexfd:', index);
         const classTeacher = new ClassTeacher();
         const classroom = await this.classroomRepository.findOne({
-          where: { id: index.classId },
+          where: { id: assignClassTeacherDto[index].classId },
         });
-        console.log('classroom:', classroom);
+        // console.log('classroom:', classroom);
 
         const teacher = await this.teacherService.findOneTeacher({
-          id: index.teacherId,
+          id: assignClassTeacherDto[index].teacherId,
         });
         console.log('teacher:', teacher);
 
-        classTeacher.classId = index.classId;
-        classTeacher.subject = teacher.subject;
+        classTeacher.classId = assignClassTeacherDto[index].classId;
+        classTeacher.subject = index;
         classTeacher.classroom = classroom;
         classTeacher.teacher = teacher;
         const rs = await this.classTeacherRepository.save(classTeacher);
-        // console.log('rs:', rs);
+        console.log('rs123:', rs);
 
         result = await result.concat(rs);
       }
