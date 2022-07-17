@@ -5,11 +5,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  OneToOne,
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { Facility } from '../facility/facility.entity';
 import { Student, Subject } from '../students/students.entity';
 import { Teacher } from '../teacher/teacher.entity';
 
@@ -18,16 +16,16 @@ export class Classroom {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
+  @Column()
   name: string;
 
-  @Column({ nullable: true })
+  @Column()
   location: string;
 
-  @Column({ nullable: true })
+  @Column()
   startYear: number;
 
-  @Column({ nullable: true })
+  @Column()
   endYear: number;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
@@ -47,10 +45,6 @@ export class Classroom {
   @OneToMany(() => ClassSubject, (classSubjects) => classSubjects.classroom)
   @JoinColumn()
   classSubjects: ClassSubject[];
-
-  @OneToMany(() => Facility, (facilities) => facilities.classroom)
-  @JoinColumn()
-  facilities: Facility[];
 }
 
 @Entity({ name: 'ClassSubject' })
@@ -58,11 +52,11 @@ export class ClassSubject {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   classId: number;
 
-  @Column()
-  subjectId: number;
+  @Column({ nullable: true })
+  nameSubject: string;
 
   @Column()
   lesson: number;
@@ -70,13 +64,10 @@ export class ClassSubject {
   @Column()
   dayOfWeek: string;
 
-  @Column()
-  sessionOfDay: string;
-
-  @Column()
+  @Column({ nullable: true })
   schoolYear: number;
 
-  @Column()
+  @Column({ nullable: true })
   semester: number;
 
   @ManyToOne(() => Subject, (subject) => subject.classSubjects)
@@ -92,21 +83,21 @@ export class ClassTeacher {
   id: number;
 
   @Column()
-  teacherId: number;
-
-  @Column()
   classId: number;
 
   @Column()
-  subjectId: number;
+  teacherId: number;
 
   @Column()
-  role: string;
+  subject: string;
 
   @Column()
+  primary: boolean;
+
+  @Column({ nullable: true })
   semester: number;
 
-  @Column()
+  @Column({ nullable: true })
   schoolYear: number;
 
   @ManyToOne(() => Teacher, (teacher) => teacher.classTeachers)
@@ -115,6 +106,6 @@ export class ClassTeacher {
   @ManyToOne(() => Classroom, (classroom) => classroom.classTeachers)
   classroom: Classroom;
 
-  @OneToOne(() => Subject, (subject) => subject.classTeacher)
-  subject: Subject;
+  // @OneToOne(() => Subject, (subject) => subject.classTeacher)
+  // subject: Subject;
 }

@@ -11,6 +11,12 @@ export class TeacherRegisterdto {
   email: string;
 
   @ApiProperty()
+  salary: number;
+
+  @ApiProperty()
+  subject: string;
+
+  @ApiProperty()
   password: string;
 
   @ApiProperty()
@@ -33,20 +39,14 @@ export class TeacherRegisterdto {
 }
 
 export class UpdateTeacherdto {
-  @ApiProperty({ example: '001' })
-  id: number;
-
-  @ApiProperty({ example: 'Iris123333' })
+  @ApiProperty({ example: 'Nam123' })
   username: string;
 
   @ApiProperty({ example: 'Nguyen Van Nam 2' })
   name: string;
 
-  @ApiProperty({ example: 'iris12223@gmail.com' })
+  @ApiProperty({ example: 'Nam@gmail.com' })
   email: string;
-
-  @ApiProperty()
-  password: string;
 
   @ApiProperty()
   sex: string;
@@ -75,12 +75,6 @@ export class GetOneTeacherdto {
 export class SearchTeacherdto {
   @ApiProperty({ example: 'Nam', nullable: true })
   name: string;
-
-  @ApiProperty({ nullable: true })
-  take: number;
-
-  @ApiProperty({ nullable: true })
-  page: number;
 }
 
 export class DeleteTeacherdto {

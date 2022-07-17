@@ -4,31 +4,28 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
 } from 'typeorm';
-import { Classroom } from '../class/class.entity';
 
 @Entity({ name: 'Facility' })
 export class Facility {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
-  classId: number;
-
-  @Column({ nullable: true })
+  @Column()
   name: string;
 
-  @Column({ nullable: true })
+  @Column()
   price: number;
 
   @Column({ nullable: true })
+  total: number;
+  @Column()
   location: string;
 
-  @Column({ nullable: true })
+  @Column()
   timeIn: Date;
 
-  @Column({ nullable: true })
+  @Column()
   status: string;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
@@ -36,7 +33,4 @@ export class Facility {
 
   @UpdateDateColumn({ name: 'Updated_At', type: 'timestamp' })
   updatedAt: Date;
-
-  @ManyToOne(() => Classroom, (classroom) => classroom.facilities)
-  classroom: Classroom;
 }

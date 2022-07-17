@@ -1,110 +1,78 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsString,
-  MaxLength,
-  MinLength,
-} from 'class-validator';
 
 export class StudentRegisterdto {
   @ApiProperty()
-  @IsNotEmpty()
   classId: number;
 
   @ApiProperty({ example: 'Iris123' })
-  @IsNotEmpty()
-  @IsString()
-  @MaxLength(40)
   username: string;
 
   @ApiProperty({ example: 'Nguyen Van Nam' })
-  @IsNotEmpty()
-  @IsString()
-  @MaxLength(40)
   name: string;
 
   @ApiProperty({ example: 'iris123@gmail.com' })
-  @IsNotEmpty()
-  @IsEmail()
   email: string;
 
-  @ApiProperty()
-  @MinLength(6)
-  @IsNotEmpty()
+  @ApiProperty({ example: 'Nam123' })
   password: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: 'Nam123' })
   sex: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: '2021-02-19' })
   dateOfBirth: Date;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: '2021-02-19' })
   address: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: 243242473 })
   phone: number;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: '2021-02-19' })
   startStudying: Date;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: '20rwtr9' })
   fatherName: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: '20rwtr9' })
   fatherJob: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: 4324214 })
   fatherPhone: number;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: '1943-09-03' })
   fatherDateOfBirth: Date;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: '31 ngo Duy Hung, tp Ha Noi' })
   fatherJobAddress: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: 'Noi' })
   motherName: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: 'fsadfsdfi' })
   motherJob: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: 243242473 })
   motherPhone: number;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: '1943-09-03' })
   motherDateOfBirth: Date;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ example: '31 ngo Duy Hung, tp Ha Noi' })
   motherJobAddress: string;
+}
+
+export class UpdateStudentParam {
+  @ApiProperty()
+  id: number;
 }
 
 export class GetOneStudentdto {
   @ApiProperty()
-  @IsNotEmpty()
   id: number;
 }
 
 export class UpdateStudentdto {
-  @ApiProperty()
-  id: number;
-
   @ApiProperty()
   classId: number;
 
@@ -175,16 +143,9 @@ export class UpdateStudentdto {
 export class SearchStudentdto {
   @ApiProperty({ example: 'Nam', nullable: true })
   name: string;
-
-  @ApiProperty({ nullable: true })
-  take: number;
-
-  @ApiProperty({ nullable: true })
-  page: number;
 }
 
 export class DeleteStudentdto {
   @ApiProperty()
-  @IsNotEmpty()
   id: number;
 }

@@ -23,6 +23,7 @@ import {
   GetOneStudentdto,
   SearchStudentdto,
   StudentRegisterdto,
+  UpdateStudentParam,
 } from './students.dto';
 
 @ApiTags('Student')
@@ -90,7 +91,7 @@ export class StudentsController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Patch()
+  @Patch(':id')
   @ApiResponse({ status: 200, description: 'Updated' })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -98,12 +99,12 @@ export class StudentsController {
     @Body() updateStudentdto: UpdateStudentdto,
     @Res() res,
     @Req() req,
+    @Param() param: UpdateStudentParam,
   ) {
-    const { id } = req.user;
     try {
       const data = await this.studentsService.updateStudent({
         ...updateStudentdto,
-        id,
+        param,
       });
 
       res.json({ data });

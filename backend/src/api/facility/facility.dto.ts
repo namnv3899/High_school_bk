@@ -20,9 +20,19 @@ export class CreateFacilitydto {
   status: string;
 }
 
+export class UpdateFacilitydtoParam {
+  @ApiProperty()
+  id: string;
+}
 export class UpdateFacilitydto {
   @ApiProperty()
-  id: number;
+  name: string;
+
+  @ApiProperty()
+  price: number;
+
+  @ApiProperty()
+  location: string;
 }
 
 export class GetOneFacilitydto {
@@ -33,12 +43,6 @@ export class GetOneFacilitydto {
 export class SearchFacilitydto {
   @ApiProperty({ example: 'Nam', nullable: true })
   name: string;
-
-  @ApiProperty({ nullable: true })
-  take: number;
-
-  @ApiProperty({ nullable: true })
-  page: number;
 }
 
 export class DeleteFacilitydto {

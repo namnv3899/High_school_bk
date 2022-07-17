@@ -4,7 +4,6 @@ import { ILike, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Student, Subject } from './students.entity';
 import {
-  UpdateStudentdto,
   DeleteStudentdto,
   SearchStudentdto,
   StudentRegisterdto,
@@ -28,6 +27,7 @@ export class StudentsService {
         id: studentRegisterdto.classId,
       });
       const student = new Student();
+      student.classId = classroom.id;
       student.username = studentRegisterdto.username;
       student.email = studentRegisterdto.email;
       student.password = bcrypt.hashSync(`${studentRegisterdto.password}`, 10);
@@ -46,6 +46,7 @@ export class StudentsService {
       student.motherJob = studentRegisterdto.motherJob;
       student.motherDateOfBirth = studentRegisterdto.motherDateOfBirth;
       student.motherPhone = studentRegisterdto.motherPhone;
+      student.motherJobAddress = studentRegisterdto.motherJobAddress;
       student.classroom = classroom;
       const rs = await this.studentRepository.save(student);
       return rs;
@@ -55,17 +56,12 @@ export class StudentsService {
   }
 
   public async searchStudent(searchStudentdto: SearchStudentdto) {
-    const take = searchStudentdto.take || 10;
-    const page = searchStudentdto.page || 1;
-    const skip = (page - 1) * take;
     const filter = searchStudentdto.name || '';
 
     try {
       const [result, total] = await this.studentRepository.findAndCount({
         where: { username: ILike(`%${filter}%`) },
         order: { username: 'ASC' },
-        take: take,
-        skip: skip,
       });
 
       return {
@@ -89,7 +85,7 @@ export class StudentsService {
     }
   }
 
-  public async updateStudent(updateStudentdto: UpdateStudentdto) {
+  public async updateStudent(updateStudentdto: any) {
     const { id, username, email } = updateStudentdto;
     try {
       const student = await this.studentRepository.findOne({ where: { id } });

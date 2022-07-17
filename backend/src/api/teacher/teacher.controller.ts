@@ -35,7 +35,7 @@ export class TeacherController {
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async createTeacher(
-    @Query() teacherRegisterdto: TeacherRegisterdto,
+    @Body() teacherRegisterdto: TeacherRegisterdto,
     @Res() res,
   ) {
     try {
@@ -89,7 +89,7 @@ export class TeacherController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Patch()
+  @Patch(':id')
   @ApiResponse({ status: 200, description: 'Updated' })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -97,12 +97,12 @@ export class TeacherController {
     @Body() updateTeacherdto: UpdateTeacherdto,
     @Res() res,
     @Req() req,
+    @Param() params: any,
   ) {
-    const { id } = req.user;
     try {
       const data = await this.teacherService.updateTeacher({
         ...updateTeacherdto,
-        id,
+        params,
       });
 
       res.json({ data });

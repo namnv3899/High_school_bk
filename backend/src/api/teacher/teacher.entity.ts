@@ -4,12 +4,12 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToOne,
+  // OneToOne,
   OneToMany,
   JoinColumn,
 } from 'typeorm';
 import { ClassTeacher } from '../class/class.entity';
-import { Salary } from '../salary/salary.entity';
+// import { Salary } from '../salary/salary.entity';
 
 @Entity({ name: 'Teacher' })
 export class Teacher {
@@ -31,6 +31,12 @@ export class Teacher {
   @Column()
   phone: number;
 
+  @Column({ nullable: true })
+  salary: number;
+
+  @Column({ nullable: true })
+  subject: string;
+
   @Column()
   address: string;
 
@@ -43,7 +49,7 @@ export class Teacher {
   @Column()
   startWorking: Date;
 
-  @Column()
+  @Column({ nullable: true })
   endWorking: Date;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
@@ -52,8 +58,8 @@ export class Teacher {
   @UpdateDateColumn({ name: 'Updated_At', type: 'timestamp' })
   updatedAt: Date;
 
-  @OneToOne(() => Salary, (salary) => salary.teacher)
-  salary: Salary;
+  // @OneToOne(() => Salary, (salary) => salary.teacher)
+  // salarys: Salary;
 
   @OneToMany(() => ClassTeacher, (classTeachers) => classTeachers.teacher)
   @JoinColumn()

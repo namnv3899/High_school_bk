@@ -24,7 +24,7 @@ export class GetOneSalaryDto {
 export class UpdateSalaryDto {
   @ApiProperty({ example: 1 })
   @IsNotEmpty()
-  teacherId: number;
+  salary: number;
 }
 
 export class SearchSalaryDto {

@@ -14,35 +14,35 @@ export class Accountant {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
+  @Column()
   username: string;
 
-  @Column({ nullable: true })
+  @Column()
   name: string;
 
   @Column({ nullable: true })
+  address: string;
+
+  @Column()
   email: string;
 
-  @Column({ nullable: true })
+  @Column()
   sex: string;
 
-  @Column({ nullable: true })
+  @Column()
   phone: number;
 
-  @Column({ nullable: true })
+  @Column()
   password: string;
 
-  @Column({ nullable: true })
+  @Column()
   dateOfBirth: Date;
 
-  @Column({ nullable: true })
+  @Column()
   startWorking: Date;
 
   @Column({ nullable: true })
   endWorking: Date;
-
-  @Column({ nullable: true })
-  tokenVerify: string;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
   createdAt: Date;

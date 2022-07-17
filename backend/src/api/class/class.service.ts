@@ -7,8 +7,10 @@ import {
   GetOneClassdto,
   SearchClassdto,
   DeleteClassdto,
-  TimetableDto,
   AssignClassTeacherDto,
+  TimetableDto,
+  GetClassTeacherDto,
+  UpdateTimetableParam,
 } from './class.dto';
 import { Subject } from '../students/students.entity';
 import { TeacherService } from '../teacher/teacher.service';
@@ -43,54 +45,129 @@ export class ClassService {
   }
 
   public async createTimetable(timetableDto: TimetableDto) {
-    const classSubject = new ClassSubject();
-    const { classId, subjectId } = timetableDto;
-    try {
-      const subject = await this.SubjectRepository.findOne({
-        where: { id: subjectId },
-      });
-      const classroom = await this.classroomRepository.findOne({
-        where: { id: classId },
-      });
-      classSubject.id = timetableDto.id;
-      classSubject.lesson = timetableDto.lesson;
-      classSubject.dayOfWeek = timetableDto.dayOfWeek;
-      classSubject.sessionOfDay = timetableDto.sessionOfDay;
-      classSubject.schoolYear = timetableDto.schoolYear;
-      classSubject.semester = timetableDto.semester;
-      classSubject.classroom = classroom;
-      classSubject.subject = subject;
+    console.log('timetableDto:', timetableDto);
+    const data = [
+      timetableDto.toanHoc,
+      timetableDto.nguVan,
+      timetableDto.ngoaiNgu,
+      timetableDto.sinhHoc,
+      timetableDto.lichSu,
+      timetableDto.diaLy,
+      timetableDto.gdcd,
+      timetableDto.theDuc,
+      timetableDto.vatLy,
+      timetableDto.hoaHoc,
+      timetableDto.tinHoc,
+      timetableDto.congNghe,
+    ];
+    // console.log('data:', data);
 
-      const rs = await this.classroomRepository.save(classSubject);
-      return rs;
+    let result: any = [];
+    try {
+      for (const index of data) {
+        // console.log('INsexfd:', index);
+        const classSubject = new ClassSubject();
+        const classroom = await this.classroomRepository.findOne({
+          where: { id: index.classId },
+        });
+        const subject = await this.SubjectRepository.findOne({
+          where: { id: index.subjectId },
+        });
+        classSubject.nameSubject = subject.name;
+        classSubject.lesson = index.lesson;
+        classSubject.classId = index.classId;
+        classSubject.dayOfWeek = index.dayOfWeek;
+        classSubject.schoolYear = index.schoolYear;
+        classSubject.semester = index.semester;
+        classSubject.classroom = classroom;
+        classSubject.subject = subject;
+        const rs = await this.classSubjectRepository.save(classSubject);
+        // console.log('rs:', rs);
+
+        result = await result.concat(rs);
+      }
+      // console.log('result:', result);
+      return result;
     } catch (error) {
       throw error;
     }
   }
 
+  public async getTimetable(data: any) {
+    const { classId } = data;
+    const classTeacher = await this.classSubjectRepository.find({
+      where: { classId },
+    });
+    return classTeacher;
+  }
+
   public async assignClassTeacher(
     assignClassTeacherDto: AssignClassTeacherDto,
   ) {
-    const { classId, teacherId } = assignClassTeacherDto;
+    // console.log('timetableDto:', assignClassTeacherDto);
+    const data = [
+      assignClassTeacherDto.chuNhiem,
+      assignClassTeacherDto.toanHoc,
+      assignClassTeacherDto.nguVan,
+      assignClassTeacherDto.ngoaiNgu,
+      assignClassTeacherDto.sinhHoc,
+      assignClassTeacherDto.lichSu,
+      assignClassTeacherDto.diaLy,
+      assignClassTeacherDto.gdcd,
+      assignClassTeacherDto.theDuc,
+      assignClassTeacherDto.vatLy,
+      assignClassTeacherDto.hoaHoc,
+      assignClassTeacherDto.tinHoc,
+      assignClassTeacherDto.congNghe,
+    ];
+    // console.log('data:', data);
+
+    let result: any = [];
     try {
-      const classroom = await this.classroomRepository.findOne({
-        where: { id: classId },
-      });
-      const teacher = await this.teacherService.findOneTeacher({
-        where: { id: teacherId },
-      });
+      for (const index of data) {
+        // console.log('INsexfd:', index);
+        const classTeacher = new ClassTeacher();
+        const classroom = await this.classroomRepository.findOne({
+          where: { id: index.classId },
+        });
+        console.log('classroom:', classroom);
 
-      const classTeacher = new ClassTeacher();
-      classTeacher.id = assignClassTeacherDto.id;
-      classTeacher.role = assignClassTeacherDto.role;
-      classTeacher.teacher = teacher;
-      classTeacher.classroom = classroom;
+        const teacher = await this.teacherService.findOneTeacher({
+          id: index.teacherId,
+        });
+        console.log('teacher:', teacher);
 
-      const rs = await this.classTeacherRepository.save(classTeacher);
-      return rs;
+        classTeacher.classId = index.classId;
+        classTeacher.subject = teacher.subject;
+        classTeacher.classroom = classroom;
+        classTeacher.teacher = teacher;
+        const rs = await this.classTeacherRepository.save(classTeacher);
+        // console.log('rs:', rs);
+
+        result = await result.concat(rs);
+      }
+      // console.log('result:', result);
+      return result;
     } catch (error) {
       throw error;
     }
+  }
+
+  public async updateTimetable(data: UpdateTimetableParam) {
+    const { classId } = data;
+    const classTeacher = await this.classSubjectRepository.find({
+      where: { classId },
+    });
+    return classTeacher;
+  }
+
+  public async getClassTeacher(data: GetClassTeacherDto) {
+    const { classId } = data;
+
+    const classTeacher = await this.classTeacherRepository.find({
+      where: { classId },
+    });
+    return classTeacher;
   }
 
   public async searchClass(searchClassdto: SearchClassdto) {

@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
 import { Facility } from './facility.entity';
 import {
-  UpdateFacilitydto,
   CreateFacilitydto,
   DeleteFacilitydto,
   GetOneFacilitydto,
@@ -27,6 +26,7 @@ export class FacilityService {
       facility.location = createFacilitydto.location;
       facility.timeIn = createFacilitydto.timeIn;
       facility.status = createFacilitydto.status;
+      facility.total = createFacilitydto.total;
 
       const rs = await this.facilityRepository.save(facility);
       return rs;
@@ -35,17 +35,12 @@ export class FacilityService {
     }
   }
   public async searchFacility(searchFacilitydto: SearchFacilitydto) {
-    const take = searchFacilitydto.take || 10;
-    const page = searchFacilitydto.page || 1;
-    const skip = (page - 1) * take;
     const filter = searchFacilitydto.name || '';
 
     try {
       const [result, total] = await this.facilityRepository.findAndCount({
         where: { name: ILike(`%${filter}%`) },
         order: { name: 'ASC' },
-        take: take,
-        skip: skip,
       });
 
       return {
@@ -70,12 +65,17 @@ export class FacilityService {
       throw error;
     }
   }
-  public async updateFacility(updateFacilitydto: UpdateFacilitydto) {
+  public async updateFacility(updateFacilitydto: any) {
     const { id } = updateFacilitydto;
     try {
-      const user = await this.facilityRepository.findOne({ where: { id } });
-
-      const rs = await this.facilityRepository.save(user);
+      const facility = await this.facilityRepository.findOne({ where: { id } });
+      facility.name = updateFacilitydto.name;
+      facility.price = updateFacilitydto.price;
+      facility.location = updateFacilitydto.location;
+      facility.timeIn = updateFacilitydto.timeIn;
+      facility.status = updateFacilitydto.status;
+      facility.total = updateFacilitydto.total;
+      const rs = await this.facilityRepository.save(facility);
       return rs;
     } catch (error) {
       throw error;

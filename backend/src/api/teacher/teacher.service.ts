@@ -6,7 +6,6 @@ import { Teacher } from './teacher.entity';
 import {
   TeacherRegisterdto,
   SearchTeacherdto,
-  UpdateTeacherdto,
   DeleteTeacherdto,
 } from './teacher.dto';
 
@@ -18,12 +17,16 @@ export class TeacherService {
   ) {}
 
   public async createTeacher(teacherRegisterdto: TeacherRegisterdto) {
+    console.log('teacherRegisterdto:', teacherRegisterdto);
+    
     try {
       const teacher = new Teacher();
-      teacher.username = teacherRegisterdto.username;
-      teacher.email = teacherRegisterdto.email;
       teacher.password = bcrypt.hashSync(`$teacherRegisterdto.password}`, 10);
       teacher.address = teacherRegisterdto.address;
+      teacher.username = teacherRegisterdto.username;
+      teacher.email = teacherRegisterdto.email;
+      teacher.salary = teacherRegisterdto.salary;
+      teacher.subject = teacherRegisterdto.subject;
       teacher.dateOfBirth = teacherRegisterdto.dateOfBirth;
       teacher.startWorking = teacherRegisterdto.startWorking;
       teacher.endWorking = teacherRegisterdto.endWorking;
@@ -32,6 +35,8 @@ export class TeacherService {
       teacher.sex = teacherRegisterdto.sex;
 
       const rs = await this.teacherRepository.save(teacher);
+      console.log('rs:', rs);
+      
       return rs;
     } catch (error) {
       throw error;
@@ -39,17 +44,12 @@ export class TeacherService {
   }
 
   public async searchTeacher(searchTeacherdto: SearchTeacherdto) {
-    const take = searchTeacherdto.take || 10;
-    const page = searchTeacherdto.page || 1;
-    const skip = (page - 1) * take;
     const filter = searchTeacherdto.name || '';
 
     try {
       const [result, total] = await this.teacherRepository.findAndCount({
         where: { username: ILike(`%${filter}%`) },
         order: { username: 'ASC' },
-        take: take,
-        skip: skip,
       });
 
       return {
@@ -78,13 +78,22 @@ export class TeacherService {
     }
   }
 
-  public async updateTeacher(updateTeacherdto: UpdateTeacherdto) {
-    const { id, username, email } = updateTeacherdto;
+  public async updateTeacher(updateTeacherdto: any) {
+    const { id } = updateTeacherdto;
     try {
       const teacher = await this.teacherRepository.findOne({ where: { id } });
-      teacher.email = email;
-      teacher.username = username;
 
+      teacher.address = updateTeacherdto.address;
+      teacher.username = updateTeacherdto.username;
+      teacher.email = updateTeacherdto.email;
+      teacher.salary = updateTeacherdto.salary;
+      teacher.subject = updateTeacherdto.subject;
+      teacher.dateOfBirth = updateTeacherdto.dateOfBirth;
+      teacher.startWorking = updateTeacherdto.startWorking;
+      teacher.endWorking = updateTeacherdto.endWorking;
+      teacher.phone = updateTeacherdto.phone;
+      teacher.name = updateTeacherdto.name;
+      teacher.sex = updateTeacherdto.sex;
       const rs = await this.teacherRepository.save(teacher);
       return rs;
     } catch (error) {

@@ -2,11 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Salary } from './salary.entity';
-import {
-  GetOneSalaryDto,
-  CreateSalaryDto,
-  UpdateSalaryDto,
-} from './salary.dto';
+import { GetOneSalaryDto, CreateSalaryDto } from './salary.dto';
 import { TeacherService } from '../teacher/teacher.service';
 import { AccountantService } from '../accountant/accountant.service';
 
@@ -33,7 +29,7 @@ export class SalaryService {
       salary.accountantId = accountant.id;
       salary.teacherId = teacher.id;
       salary.techerName = teacher.name;
-      salary.teacher = teacher;
+      // salary.teacher = teacher;
       salary.accountant = accountant;
       salary.salary = createSalaryDto.salary;
 
@@ -66,7 +62,7 @@ export class SalaryService {
     }
   }
 
-  public async updateSalary(updateSalaryDto: UpdateSalaryDto) {
+  public async updateSalary(updateSalaryDto: any) {
     const { teacherId } = updateSalaryDto;
     try {
       const salary = await this.salaryRepository.findOne({
