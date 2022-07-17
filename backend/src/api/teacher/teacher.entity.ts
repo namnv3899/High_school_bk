@@ -49,7 +49,7 @@ export class Teacher {
   @Column()
   startWorking: Date;
 
-  @Column()
+  @Column({ nullable: true })
   endWorking: Date;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
