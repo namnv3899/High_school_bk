@@ -262,7 +262,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 1,
-      classId: 1,
+      classId: 9,
     },
   })
   chuNhiem: {
@@ -273,7 +273,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 1,
-      classId: 1,
+      classId: 9,
     },
   })
   toanHoc: {
@@ -284,7 +284,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 2,
-      classId: 1,
+      classId: 9,
     },
   })
   nguVan: {
@@ -295,7 +295,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 3,
-      classId: 1,
+      classId: 9,
     },
   })
   ngoaiNgu: {
@@ -306,7 +306,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 4,
-      classId: 1,
+      classId: 9,
     },
   })
   sinhHoc: {
@@ -317,7 +317,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 5,
-      classId: 1,
+      classId: 9,
     },
   })
   lichSu: {
@@ -328,7 +328,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 6,
-      classId: 1,
+      classId: 9,
     },
   })
   diaLy: {
@@ -339,7 +339,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 7,
-      classId: 1,
+      classId: 9,
     },
   })
   gdcd: {
@@ -350,7 +350,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 8,
-      classId: 1,
+      classId: 9,
     },
   })
   theDuc: {
@@ -361,7 +361,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 9,
-      classId: 1,
+      classId: 9,
     },
   })
   vatLy: {
@@ -372,7 +372,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 10,
-      classId: 1,
+      classId: 9,
     },
   })
   hoaHoc: {
@@ -383,7 +383,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 11,
-      classId: 1,
+      classId: 9,
     },
   })
   tinHoc: {
@@ -394,7 +394,7 @@ export class AssignClassTeacherDto {
   @ApiProperty({
     example: {
       teacherId: 12,
-      classId: 1,
+      classId: 9,
     },
   })
   congNghe: {

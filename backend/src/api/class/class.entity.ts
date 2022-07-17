@@ -91,9 +91,6 @@ export class ClassTeacher {
   @Column()
   subject: string;
 
-  @Column()
-  primary: boolean;
-
   @Column({ nullable: true })
   semester: number;
 
