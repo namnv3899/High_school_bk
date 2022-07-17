@@ -5,7 +5,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  OneToOne,
   OneToMany,
   JoinColumn,
 } from 'typeorm';
@@ -53,11 +52,11 @@ export class ClassSubject {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   classId: number;
 
-  @Column()
-  subjectId: number;
+  @Column({ nullable: true })
+  nameSubject: string;
 
   @Column()
   lesson: number;
@@ -65,13 +64,10 @@ export class ClassSubject {
   @Column()
   dayOfWeek: string;
 
-  @Column()
-  sessionOfDay: string;
-
-  @Column()
+  @Column({ nullable: true })
   schoolYear: number;
 
-  @Column()
+  @Column({ nullable: true })
   semester: number;
 
   @ManyToOne(() => Subject, (subject) => subject.classSubjects)
@@ -87,21 +83,21 @@ export class ClassTeacher {
   id: number;
 
   @Column()
-  teacherId: number;
-
-  @Column()
   classId: number;
 
   @Column()
-  subjectId: number;
+  teacherId: number;
 
   @Column()
-  role: string;
+  subject: string;
 
   @Column()
+  primary: boolean;
+
+  @Column({ nullable: true })
   semester: number;
 
-  @Column()
+  @Column({ nullable: true })
   schoolYear: number;
 
   @ManyToOne(() => Teacher, (teacher) => teacher.classTeachers)
@@ -110,6 +106,6 @@ export class ClassTeacher {
   @ManyToOne(() => Classroom, (classroom) => classroom.classTeachers)
   classroom: Classroom;
 
-  @OneToOne(() => Subject, (subject) => subject.classTeacher)
-  subject: Subject;
+  // @OneToOne(() => Subject, (subject) => subject.classTeacher)
+  // subject: Subject;
 }

@@ -35,7 +35,7 @@ export class Teacher {
   salary: number;
 
   @Column({ nullable: true })
-  subject: number;
+  subject: string;
 
   @Column()
   address: string;

@@ -14,7 +14,7 @@ export class TeacherRegisterdto {
   salary: number;
 
   @ApiProperty()
-  subject: number;
+  subject: string;
 
   @ApiProperty()
   password: string;

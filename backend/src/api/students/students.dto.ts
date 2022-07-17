@@ -62,15 +62,17 @@ export class StudentRegisterdto {
   motherJobAddress: string;
 }
 
+export class UpdateStudentParam {
+  @ApiProperty()
+  id: number;
+}
+
 export class GetOneStudentdto {
   @ApiProperty()
   id: number;
 }
 
 export class UpdateStudentdto {
-  @ApiProperty()
-  id: number;
-
   @ApiProperty()
   classId: number;
 

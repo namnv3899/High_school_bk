@@ -23,6 +23,7 @@ import {
   GetOneStudentdto,
   SearchStudentdto,
   StudentRegisterdto,
+  UpdateStudentParam,
 } from './students.dto';
 
 @ApiTags('Student')
@@ -98,7 +99,7 @@ export class StudentsController {
     @Body() updateStudentdto: UpdateStudentdto,
     @Res() res,
     @Req() req,
-    @Param() param,
+    @Param() param: UpdateStudentParam,
   ) {
     try {
       const data = await this.studentsService.updateStudent({

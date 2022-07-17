@@ -21,9 +21,12 @@ import {
   GetOneClassdto,
   SearchClassdto,
   DeleteClassdto,
-  TimetableDto,
   AssignClassTeacherDto,
   ParamsUpdate,
+  GetTimetableDto,
+  GetClassTeacherDto,
+  TimetableDto,
+  UpdateTimetableParam,
 } from './class.dto';
 
 @ApiTags('Class')
@@ -57,6 +60,42 @@ export class ClassController {
     }
   }
 
+  @Patch('timetable/:classId')
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async Timetable(
+    @Param() classId: UpdateTimetableParam,
+    @Body() timetableDto: TimetableDto,
+    @Res() res,
+  ) {
+    try {
+      const data = await this.classService.updateTimetable({
+        ...timetableDto,
+        ...classId,
+      });
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get('timetable/:classId')
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async getTimetable(
+    @Param() getTimetableDto: GetTimetableDto,
+    @Res() res,
+  ) {
+    try {
+      const data = await this.classService.getTimetable(getTimetableDto);
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   @Post('assignClassTeacher')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -68,6 +107,23 @@ export class ClassController {
       const data = await this.classService.assignClassTeacher(
         assignClassTeacherDto,
       );
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get('classTeacher/:classId')
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async getClassTeacher(
+    @Param() getClassTeacherDto: GetClassTeacherDto,
+    @Res() res,
+  ) {
+    try {
+      const data = await this.classService.getClassTeacher(getClassTeacherDto);
       res.json({ data });
     } catch (error) {
       throw error;

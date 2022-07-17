@@ -4,12 +4,11 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToOne,
   OneToMany,
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Classroom, ClassSubject, ClassTeacher } from '../class/class.entity';
+import { Classroom, ClassSubject } from '../class/class.entity';
 import { StudentSubject } from '../score/scores.entity';
 
 @Entity({ name: 'Student' })
@@ -101,9 +100,6 @@ export class Subject {
   @Column()
   name: string;
 
-  @Column()
-  classTeacherId: number;
-
   @OneToMany(() => StudentSubject, (studentSubjects) => studentSubjects.subject)
   @JoinColumn()
   studentSubjects: StudentSubject[];
@@ -112,7 +108,7 @@ export class Subject {
   @JoinColumn()
   classSubjects: ClassSubject[];
 
-  @OneToOne(() => ClassTeacher, (classTeacher) => classTeacher.subject)
-  @JoinColumn()
-  classTeacher: ClassTeacher;
+  // @OneToOne(() => ClassTeacher, (classTeacher) => classTeacher.subject)
+  // @JoinColumn()
+  // classTeacher: ClassTeacher;
 }
