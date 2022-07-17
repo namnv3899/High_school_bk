@@ -17,7 +17,7 @@ export class Facility {
   @Column()
   price: number;
 
-  @Column()
+  @Column({ nullable: true })
   total: number;
   @Column()
   location: string;
