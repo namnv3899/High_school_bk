@@ -35,7 +35,7 @@ export class TeacherController {
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async createTeacher(
-    @Query() teacherRegisterdto: TeacherRegisterdto,
+    @Body() teacherRegisterdto: TeacherRegisterdto,
     @Res() res,
   ) {
     try {
