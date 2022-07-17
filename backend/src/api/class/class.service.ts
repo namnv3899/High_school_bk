@@ -59,7 +59,6 @@ export class ClassService {
       timetableDto.hoaHoc,
       timetableDto.tinHoc,
       timetableDto.congNghe,
-      timetableDto.dgqp,
     ];
     // console.log('data:', data);
 
@@ -107,6 +106,7 @@ export class ClassService {
   ) {
     // console.log('timetableDto:', assignClassTeacherDto);
     const data = [
+      assignClassTeacherDto.chuNhiem,
       assignClassTeacherDto.toanHoc,
       assignClassTeacherDto.nguVan,
       assignClassTeacherDto.ngoaiNgu,
@@ -119,7 +119,6 @@ export class ClassService {
       assignClassTeacherDto.hoaHoc,
       assignClassTeacherDto.tinHoc,
       assignClassTeacherDto.congNghe,
-      assignClassTeacherDto.dgqp,
     ];
     // console.log('data:', data);
 
@@ -140,7 +139,6 @@ export class ClassService {
 
         classTeacher.classId = index.classId;
         classTeacher.subject = teacher.subject;
-        classTeacher.primary = index.primary;
         classTeacher.classroom = classroom;
         classTeacher.teacher = teacher;
         const rs = await this.classTeacherRepository.save(classTeacher);

@@ -256,25 +256,6 @@ export class TimetableDto {
     schoolYear: number;
     semester: number;
   };
-
-  @ApiProperty({
-    example: {
-      subjectId: 12,
-      classId: 1,
-      lesson: 1,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  dgqp: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
 }
 
 export class AssignClassTeacherDto {
@@ -282,169 +263,143 @@ export class AssignClassTeacherDto {
     example: {
       teacherId: 1,
       classId: 1,
-      primary: true,
+    },
+  })
+  chuNhiem: {
+    teacherId: number;
+    classId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 1,
+      classId: 1,
     },
   })
   toanHoc: {
     teacherId: number;
     classId: number;
-    primary: boolean;
   };
 
   @ApiProperty({
     example: {
       teacherId: 2,
       classId: 1,
-      primary: false,
     },
   })
   nguVan: {
     teacherId: number;
     classId: number;
-    primary: boolean;
   };
 
   @ApiProperty({
     example: {
       teacherId: 3,
       classId: 1,
-      primary: false,
     },
   })
   ngoaiNgu: {
     teacherId: number;
     classId: number;
-    primary: boolean;
   };
 
   @ApiProperty({
     example: {
       teacherId: 4,
       classId: 1,
-      primary: false,
     },
   })
   sinhHoc: {
     teacherId: number;
     classId: number;
-    primary: boolean;
   };
 
   @ApiProperty({
     example: {
       teacherId: 5,
       classId: 1,
-      primary: false,
     },
   })
   lichSu: {
     teacherId: number;
     classId: number;
-    primary: boolean;
   };
 
   @ApiProperty({
     example: {
       teacherId: 6,
       classId: 1,
-      primary: false,
     },
   })
   diaLy: {
     teacherId: number;
     classId: number;
-    primary: boolean;
   };
 
   @ApiProperty({
     example: {
       teacherId: 7,
       classId: 1,
-      primary: false,
     },
   })
   gdcd: {
     teacherId: number;
     classId: number;
-    primary: boolean;
   };
 
   @ApiProperty({
     example: {
       teacherId: 8,
       classId: 1,
-      primary: false,
     },
   })
   theDuc: {
     teacherId: number;
     classId: number;
-    primary: boolean;
   };
 
   @ApiProperty({
     example: {
       teacherId: 9,
       classId: 1,
-      primary: false,
     },
   })
   vatLy: {
     teacherId: number;
     classId: number;
-    primary: boolean;
   };
 
   @ApiProperty({
     example: {
       teacherId: 10,
       classId: 1,
-      primary: false,
     },
   })
   hoaHoc: {
     teacherId: number;
     classId: number;
-    primary: boolean;
   };
 
   @ApiProperty({
     example: {
       teacherId: 11,
       classId: 1,
-      primary: false,
     },
   })
   tinHoc: {
     teacherId: number;
     classId: number;
-    primary: boolean;
   };
 
   @ApiProperty({
     example: {
       teacherId: 12,
       classId: 1,
-      primary: false,
     },
   })
   congNghe: {
     teacherId: number;
     classId: number;
-    primary: boolean;
-  };
-
-  @ApiProperty({
-    example: {
-      teacherId: 13,
-      classId: 1,
-      primary: false,
-    },
-  })
-  dgqp: {
-    teacherId: number;
-    classId: number;
-    primary: boolean;
   };
 }
 
