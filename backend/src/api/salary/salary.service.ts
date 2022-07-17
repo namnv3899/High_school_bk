@@ -29,7 +29,7 @@ export class SalaryService {
       salary.accountantId = accountant.id;
       salary.teacherId = teacher.id;
       salary.techerName = teacher.name;
-      salary.teacher = teacher;
+      // salary.teacher = teacher;
       salary.accountant = accountant;
       salary.salary = createSalaryDto.salary;
 

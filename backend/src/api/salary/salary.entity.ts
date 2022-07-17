@@ -4,12 +4,12 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   ManyToOne,
-  OneToOne,
+  // OneToOne,
   UpdateDateColumn,
-  JoinColumn,
+  // JoinColumn,
 } from 'typeorm';
 import { Accountant } from '../accountant/accountant.entity';
-import { Teacher } from '../teacher/teacher.entity';
+// import { Teacher } from '../teacher/teacher.entity';
 
 @Entity({ name: 'Salary' })
 export class Salary {
@@ -37,7 +37,7 @@ export class Salary {
   @ManyToOne(() => Accountant, (accountant) => accountant.salaries)
   accountant: Accountant;
 
-  @OneToOne(() => Teacher, (teacher) => teacher.salarys)
-  @JoinColumn()
-  teacher: Teacher;
+  // @OneToOne(() => Teacher, (teacher) => teacher.salarys)
+  // @JoinColumn()
+  // teacher: Teacher;
 }

@@ -17,6 +17,8 @@ export class TeacherService {
   ) {}
 
   public async createTeacher(teacherRegisterdto: TeacherRegisterdto) {
+    console.log('teacherRegisterdto:', teacherRegisterdto);
+    
     try {
       const teacher = new Teacher();
       teacher.password = bcrypt.hashSync(`$teacherRegisterdto.password}`, 10);
@@ -33,6 +35,8 @@ export class TeacherService {
       teacher.sex = teacherRegisterdto.sex;
 
       const rs = await this.teacherRepository.save(teacher);
+      console.log('rs:', rs);
+      
       return rs;
     } catch (error) {
       throw error;
