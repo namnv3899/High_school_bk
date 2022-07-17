@@ -10,7 +10,7 @@ import {
   AssignClassTeacherDto,
   TimetableDto,
   GetClassTeacherDto,
-  UpdateTimetableParam,
+  // UpdateTimetableParam,
 } from './class.dto';
 import { Subject } from '../students/students.entity';
 import { TeacherService } from '../teacher/teacher.service';
@@ -46,47 +46,25 @@ export class ClassService {
 
   public async createTimetable(timetableDto: TimetableDto) {
     console.log('timetableDto:', timetableDto);
-    const data = [
-      timetableDto.toanHoc,
-      timetableDto.nguVan,
-      timetableDto.ngoaiNgu,
-      timetableDto.sinhHoc,
-      timetableDto.lichSu,
-      timetableDto.diaLy,
-      timetableDto.gdcd,
-      timetableDto.theDuc,
-      timetableDto.vatLy,
-      timetableDto.hoaHoc,
-      timetableDto.tinHoc,
-      timetableDto.congNghe,
-    ];
-    // console.log('data:', data);
 
     let result: any = [];
     try {
-      for (const index of data) {
-        // console.log('INsexfd:', index);
-        const classSubject = new ClassSubject();
-        const classroom = await this.classroomRepository.findOne({
-          where: { id: index.classId },
-        });
-        const subject = await this.SubjectRepository.findOne({
-          where: { id: index.subjectId },
-        });
-        classSubject.nameSubject = subject.name;
-        classSubject.lesson = index.lesson;
-        classSubject.classId = index.classId;
-        classSubject.dayOfWeek = index.dayOfWeek;
-        classSubject.schoolYear = index.schoolYear;
-        classSubject.semester = index.semester;
-        classSubject.classroom = classroom;
-        classSubject.subject = subject;
-        const rs = await this.classSubjectRepository.save(classSubject);
-        // console.log('rs:', rs);
+      const classSubject = new ClassSubject();
+      const classroom = await this.classroomRepository.findOne({
+        where: { id: timetableDto.classId },
+      });
+      classSubject.lesson = timetableDto.lesson;
+      classSubject.classId = classroom.id;
+      classSubject.monday = timetableDto.monday;
+      classSubject.tuesday = timetableDto.tuesday;
+      classSubject.wednesday = timetableDto.wednesday;
+      classSubject.thursday = timetableDto.thursday;
+      classSubject.friday = timetableDto.friday;
+      classSubject.saturday = timetableDto.saturday;
+      const rs = await this.classSubjectRepository.save(classSubject);
 
-        result = await result.concat(rs);
-      }
-      // console.log('result:', result);
+      result = await result.concat(rs);
+
       return result;
     } catch (error) {
       throw error;
@@ -104,61 +82,69 @@ export class ClassService {
   public async assignClassTeacher(
     assignClassTeacherDto: AssignClassTeacherDto,
   ) {
-    console.log('timetableDto:', assignClassTeacherDto);
-    // const data = [
-    //   assignClassTeacherDto.chuNhiem,
-    //   assignClassTeacherDto.toanHoc,
-    //   assignClassTeacherDto.nguVan,
-    //   assignClassTeacherDto.ngoaiNgu,
-    //   assignClassTeacherDto.sinhHoc,
-    //   assignClassTeacherDto.lichSu,
-    //   assignClassTeacherDto.diaLy,
-    //   assignClassTeacherDto.gdcd,
-    //   assignClassTeacherDto.theDuc,
-    //   assignClassTeacherDto.vatLy,
-    //   assignClassTeacherDto.hoaHoc,
-    //   assignClassTeacherDto.tinHoc,
-    //   assignClassTeacherDto.congNghe,
-    // ];
-    // console.log('data:', data);
-
     let result: any = [];
     try {
       for (const index in assignClassTeacherDto) {
-        // console.log('INsexfd:', index);
         const classTeacher = new ClassTeacher();
         const classroom = await this.classroomRepository.findOne({
           where: { id: assignClassTeacherDto[index].classId },
         });
-        // console.log('classroom:', classroom);
 
         const teacher = await this.teacherService.findOneTeacher({
           id: assignClassTeacherDto[index].teacherId,
         });
-        console.log('teacher:', teacher);
 
         classTeacher.classId = assignClassTeacherDto[index].classId;
         classTeacher.subject = index;
         classTeacher.classroom = classroom;
         classTeacher.teacher = teacher;
         const rs = await this.classTeacherRepository.save(classTeacher);
-        console.log('rs123:', rs);
-
         result = await result.concat(rs);
       }
-      // console.log('result:', result);
       return result;
     } catch (error) {
       throw error;
     }
   }
 
-  public async updateTimetable(data: UpdateTimetableParam) {
-    const { classId } = data;
-    const classTeacher = await this.classSubjectRepository.find({
-      where: { classId },
+  public async updateClassTeacher(data: any) {
+    let result: any;
+    try {
+      for (const index in data) {
+        // console.log('INsexfd:', index);
+        const classTeacher = await this.classTeacherRepository.findOne({
+          where: { id: data[index].classteacherId },
+        });
+
+        const teacher = await this.teacherService.findOneTeacher({
+          id: data[index].teacherId,
+        });
+
+        classTeacher.teacher = teacher;
+        const rs = await this.classTeacherRepository.save(classTeacher);
+        result = await result.concat(rs);
+      }
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async updateTimetable(data: any) {
+    const { classId, lesson } = data;
+    const classSubject = await this.classSubjectRepository.findOne({
+      where: { classId, lesson },
     });
-    return classTeacher;
+
+    classSubject.monday = data.monday;
+    classSubject.tuesday = data.tuesday;
+    classSubject.wednesday = data.wednesday;
+    classSubject.thursday = data.thursday;
+    classSubject.friday = data.friday;
+    classSubject.saturday = data.saturday;
+
+    const rs = await this.classSubjectRepository.save(classSubject);
+    return rs;
   }
 
   public async getClassTeacher(data: GetClassTeacherDto) {

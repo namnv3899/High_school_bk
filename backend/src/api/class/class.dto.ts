@@ -28,234 +28,53 @@ export class GetTimetableDto {
   classId: number;
 }
 
+export class UpdateTimetableDto {
+  @ApiProperty()
+  lesson: number;
+
+  @ApiProperty()
+  monday: string;
+
+  @ApiProperty()
+  tuesday: string;
+
+  @ApiProperty()
+  wednesday: string;
+
+  @ApiProperty()
+  thursday: string;
+
+  @ApiProperty()
+  friday: string;
+
+  @ApiProperty()
+  saturday: string;
+}
+
 export class TimetableDto {
-  @ApiProperty({
-    example: {
-      subjectId: 1,
-      classId: 1,
-      lesson: 1,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  toanHoc: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
+  @ApiProperty()
+  classId: number;
 
-  @ApiProperty({
-    example: {
-      subjectId: 3,
-      classId: 1,
-      lesson: 4,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  nguVan: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
+  @ApiProperty()
+  lesson: number;
 
-  @ApiProperty({
-    example: {
-      subjectId: 4,
-      classId: 1,
-      lesson: 1,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  ngoaiNgu: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
+  @ApiProperty()
+  monday: string;
 
-  @ApiProperty({
-    example: {
-      subjectId: 5,
-      classId: 1,
-      lesson: 1,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  sinhHoc: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
+  @ApiProperty()
+  tuesday: string;
 
-  @ApiProperty({
-    example: {
-      subjectId: 2,
-      classId: 1,
-      lesson: 1,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  lichSu: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
+  @ApiProperty()
+  wednesday: string;
 
-  @ApiProperty({
-    example: {
-      subjectId: 8,
-      classId: 1,
-      lesson: 1,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  diaLy: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
+  @ApiProperty()
+  thursday: string;
 
-  @ApiProperty({
-    example: {
-      subjectId: 9,
-      classId: 1,
-      lesson: 1,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  gdcd: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
+  @ApiProperty()
+  friday: string;
 
-  @ApiProperty({
-    example: {
-      subjectId: 13,
-      classId: 1,
-      lesson: 1,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  theDuc: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
-
-  @ApiProperty({
-    example: {
-      subjectId: 6,
-      classId: 1,
-      lesson: 1,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  vatLy: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
-
-  @ApiProperty({
-    example: {
-      subjectId: 7,
-      classId: 1,
-      lesson: 1,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  hoaHoc: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
-
-  @ApiProperty({
-    example: {
-      subjectId: 10,
-      classId: 1,
-      lesson: 1,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  tinHoc: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
-
-  @ApiProperty({
-    example: {
-      subjectId: 11,
-      classId: 1,
-      lesson: 1,
-      dayOfWeek: 'Thứ 2',
-      schoolYear: 2020,
-      semester: 1,
-    },
-  })
-  congNghe: {
-    subjectId: number;
-    classId: number;
-    lesson: number;
-    dayOfWeek: string;
-    schoolYear: number;
-    semester: number;
-  };
+  @ApiProperty()
+  saturday: string;
 }
 
 export class AssignClassTeacherDto {
@@ -401,6 +220,156 @@ export class AssignClassTeacherDto {
     teacherId: number;
     classId: number;
   };
+}
+
+export class UpdateClassTeacherDto {
+  @ApiProperty({
+    example: {
+      teacherId: 14,
+      classteacherId: 1,
+    },
+  })
+  chuNhiem: {
+    teacherId: number;
+    classteacherId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 1,
+      classteacherId: 2,
+    },
+  })
+  toanHoc: {
+    teacherId: number;
+    classteacherId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 2,
+      classteacherId: 3,
+    },
+  })
+  nguVan: {
+    teacherId: number;
+    classteacherId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 3,
+      classteacherId: 5,
+    },
+  })
+  ngoaiNgu: {
+    teacherId: number;
+    classteacherId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 4,
+      classteacherId: 6,
+    },
+  })
+  sinhHoc: {
+    teacherId: number;
+    classteacherId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 5,
+      classteacherId: 1,
+    },
+  })
+  lichSu: {
+    teacherId: number;
+    classteacherId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 6,
+      classteacherId: 1,
+    },
+  })
+  diaLy: {
+    teacherId: number;
+    classteacherId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 7,
+      classteacherId: 1,
+    },
+  })
+  gdcd: {
+    teacherId: number;
+    classteacherId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 8,
+      classteacherId: 1,
+    },
+  })
+  theDuc: {
+    teacherId: number;
+    classteacherId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 9,
+      classteacherId: 1,
+    },
+  })
+  vatLy: {
+    teacherId: number;
+    classteacherId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 10,
+      classteacherId: 1,
+    },
+  })
+  hoaHoc: {
+    teacherId: number;
+    classteacherId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 11,
+      classteacherId: 1,
+    },
+  })
+  tinHoc: {
+    teacherId: number;
+    classteacherId: number;
+  };
+
+  @ApiProperty({
+    example: {
+      teacherId: 12,
+      classteacherId: 1,
+    },
+  })
+  congNghe: {
+    teacherId: number;
+    classteacherId: number;
+  };
+}
+
+export class updateClassTeacher {
+  @ApiProperty({ example: 1 })
+  classId: string;
 }
 
 export class UpdateClassdto {

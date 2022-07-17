@@ -27,6 +27,9 @@ import {
   GetClassTeacherDto,
   TimetableDto,
   UpdateTimetableParam,
+  updateClassTeacher,
+  UpdateClassTeacherDto,
+  UpdateTimetableDto,
 } from './class.dto';
 
 @ApiTags('Class')
@@ -65,12 +68,12 @@ export class ClassController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async Timetable(
     @Param() classId: UpdateTimetableParam,
-    @Body() timetableDto: TimetableDto,
+    @Body() updateTimetableDto: UpdateTimetableDto,
     @Res() res,
   ) {
     try {
       const data = await this.classService.updateTimetable({
-        ...timetableDto,
+        ...updateTimetableDto,
         ...classId,
       });
       res.json({ data });
@@ -106,6 +109,26 @@ export class ClassController {
     try {
       const data = await this.classService.assignClassTeacher(
         assignClassTeacherDto,
+      );
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @Patch('assignClassTeacher/:classId')
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async updateClassTeacher(
+    @Body() updateClassTeacherDto: UpdateClassTeacherDto,
+    @Res() res,
+    @Param() param: updateClassTeacher,
+  ) {
+    console.log(param);
+
+    try {
+      const data = await this.classService.updateClassTeacher(
+        updateClassTeacherDto,
       );
       res.json({ data });
     } catch (error) {
