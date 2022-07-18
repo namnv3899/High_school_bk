@@ -5,8 +5,9 @@ import {
   CreateDateColumn,
   ManyToOne,
   UpdateDateColumn,
+  Double,
 } from 'typeorm';
-import { Student, Subject } from '../students/students.entity';
+import { Student } from '../students/students.entity';
 @Entity({ name: 'StudentSubject' })
 export class StudentSubject {
   @PrimaryGeneratedColumn()
@@ -14,6 +15,9 @@ export class StudentSubject {
 
   @Column()
   studentId: number;
+
+  @Column()
+  subject: string;
 
   @Column({ nullable: true })
   score15m1: number;
@@ -48,14 +52,14 @@ export class StudentSubject {
   @UpdateDateColumn({ name: 'Updated_At', type: 'timestamp' })
   updatedAt: Date;
 
-  @Column()
+  @Column({ type: 'float' })
   startTimeCalculationScore: number;
 
-  @Column()
-  endTimeCalculationScore: number;
+  @Column({ type: 'float' })
+  endTimeCalculationScore: Double;
 
-  @ManyToOne(() => Subject, (subject) => subject.studentSubjects)
-  subject: Subject;
+  // @ManyToOne(() => Subject, (subject) => subject.studentSubjects)
+  // subject: Subject;
 
   @ManyToOne(() => Student, (student) => student.studentSubjects)
   student: Student;

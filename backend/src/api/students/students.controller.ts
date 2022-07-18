@@ -24,6 +24,7 @@ import {
   SearchStudentdto,
   StudentRegisterdto,
   UpdateStudentParam,
+  StudentInClassDto,
 } from './students.dto';
 
 @ApiTags('Student')
@@ -59,6 +60,25 @@ export class StudentsController {
   ) {
     try {
       const data = await this.studentsService.searchStudent(searchStudentdto);
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get(':classId')
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async getAllStudentInClass(
+    @Param() studentInClassDto: StudentInClassDto,
+    @Res() res,
+  ) {
+    try {
+      const data = await this.studentsService.getAllStudentInClass(
+        studentInClassDto,
+      );
       res.json({ data });
     } catch (error) {
       throw error;

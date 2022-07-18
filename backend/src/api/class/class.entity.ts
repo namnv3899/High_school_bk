@@ -7,6 +7,7 @@ import {
   ManyToOne,
   OneToMany,
   JoinColumn,
+  JoinTable,
 } from 'typeorm';
 import { Student, Subject } from '../students/students.entity';
 import { Teacher } from '../teacher/teacher.entity';
@@ -34,9 +35,9 @@ export class Classroom {
   @UpdateDateColumn({ name: 'Updated_At', type: 'timestamp' })
   updatedAt: Date;
 
-  @OneToMany(() => Student, (students) => students.classroom)
+  @OneToMany(() => Student, (student) => student.classroom)
   @JoinColumn()
-  students: Student[];
+  student: Student[];
 
   @OneToMany(() => ClassTeacher, (classTeachers) => classTeachers.classroom)
   @JoinColumn()
@@ -113,9 +114,11 @@ export class ClassTeacher {
   schoolYear: number;
 
   @ManyToOne(() => Teacher, (teacher) => teacher.classTeachers)
+  @JoinTable()
   teacher: Teacher;
 
   @ManyToOne(() => Classroom, (classroom) => classroom.classTeachers)
+  @JoinTable()
   classroom: Classroom;
 
   // @OneToOne(() => Subject, (subject) => subject.classTeacher)

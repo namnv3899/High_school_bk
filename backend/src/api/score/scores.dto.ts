@@ -5,9 +5,6 @@ export class CreateScoreDto {
   studentId: number;
 
   @ApiProperty()
-  subjectId: number;
-
-  @ApiProperty()
   score15m1: number;
 
   @ApiProperty()
@@ -25,8 +22,8 @@ export class CreateScoreDto {
   @ApiProperty()
   score90m: number;
 
-  @ApiProperty()
-  averageScore: number;
+  @ApiProperty({ example: 'Ngoại Ngữ' })
+  subject: string;
 
   @ApiProperty()
   schoolYear: number;
@@ -38,6 +35,27 @@ export class CreateScoreDto {
 export class UpdateScoreDtoParam {
   @ApiProperty()
   id: number;
+}
+
+export class ScoreOfStudentDto {
+  @ApiProperty()
+  studentId: number;
+}
+
+export class ScoreOfSubjectDto {
+  @ApiProperty()
+  classId: number;
+
+  @ApiProperty()
+  subject: string;
+}
+
+export class ScoreOfClassOfTeacherPrimary {
+  @ApiProperty()
+  classId: number;
+
+  @ApiProperty()
+  subject: string;
 }
 
 export class UpdateScoreDto {
@@ -58,9 +76,6 @@ export class UpdateScoreDto {
 
   @ApiProperty()
   score90m: number;
-
-  @ApiProperty()
-  averageScore: number;
 
   @ApiProperty()
   schoolYear: number;

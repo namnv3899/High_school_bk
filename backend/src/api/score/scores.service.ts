@@ -8,6 +8,9 @@ import {
   GetScoreDto,
   AverageScoreDto,
   DeleteScoreDto,
+  ScoreOfStudentDto,
+  ScoreOfSubjectDto,
+  ScoreOfClassOfTeacherPrimary,
 } from './scores.dto';
 import { StudentSubject } from './scores.entity';
 
@@ -22,7 +25,7 @@ export class ScoreService {
   ) {}
 
   public async createScore(createScoreDto: CreateScoreDto) {
-    const { studentId, subjectId } = createScoreDto;
+    const { studentId } = createScoreDto;
     const score = new StudentSubject();
     const startTimeCalScore =
       Math.floor(new Date().getTime()) + 1000 * 7 * 24 * 60 * 60 * 12;
@@ -32,16 +35,22 @@ export class ScoreService {
       const student = await this.studentsService.findOneStudent({
         id: studentId,
       });
-      const subject = await this.subjectRepository.findOne({
-        where: { id: subjectId },
-      });
+      // const subject = await this.subjectRepository.findOne({
+      //   where: { id: subjectId },
+      // });
       score.schoolYear = createScoreDto.schoolYear;
       score.semester = createScoreDto.semester;
       score.startTimeCalculationScore = startTimeCalScore;
       score.endTimeCalculationScore = endTimeCalScore;
+      score.score15m1 = createScoreDto.score15m1;
+      score.score15m2 = createScoreDto.score15m2;
+      score.score15m3 = createScoreDto.score15m3;
+      score.score45m1 = createScoreDto.score45m1;
+      score.score45m2 = createScoreDto.score45m2;
+      score.score90m = createScoreDto.score90m;
+      score.studentId = student.id;
       score.student = student;
-      score.subject = subject;
-
+      score.subject = createScoreDto.subject;
       const rs = await this.scoreRepository.save(score);
       return rs;
     } catch (error) {
@@ -67,6 +76,59 @@ export class ScoreService {
       score.score90m = updateScoreDto.score90m;
 
       const rs = await this.scoreRepository.save(score);
+      return rs;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async listScoreOfOneSubject(scoreOfSubjectDto: ScoreOfSubjectDto) {
+    try {
+      const { classId, subject } = scoreOfSubjectDto;
+      // console.log('scoreOfClassOfTeacherPrimary:', scoreOfClassOfTeacherPrimary);
+      // const rs = await this.scoreRepository.find({ where: { subject } });
+      const rs = await this.scoreRepository
+        .createQueryBuilder('studentSubjects')
+        .innerJoinAndSelect('studentSubjects.student', 'student')
+        .innerJoin('student.classroom', 'classroom')
+        .where('classroom.id=:classId', { classId })
+        .where('studentSubjects.subject=:subject', { subject })
+        .orderBy('student.name', 'ASC')
+        .getMany();
+      console.log('rs:', rs);
+
+      return rs;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async listScoreOfClassOfTeacherPrimary(
+    scoreOfClassOfTeacherPrimary: ScoreOfClassOfTeacherPrimary,
+  ) {
+    try {
+      const { classId, subject } = scoreOfClassOfTeacherPrimary;
+      const rs = await this.scoreRepository
+        .createQueryBuilder('studentSubjects')
+        .innerJoinAndSelect('studentSubjects.student', 'student')
+        .innerJoin('student.classroom', 'classroom')
+        .innerJoin('classroom.classTeachers', 'classTeachers')
+        .where('classroom.id=:classId', { classId })
+        .andWhere('classTeachers.subject=:subject', { subject })
+        .orderBy('student.name', 'ASC')
+        .getMany();
+      console.log('rs:', rs);
+      return rs;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async listScoreOfStudent(scoreOfStudentDto: ScoreOfStudentDto) {
+    try {
+      const rs = await this.scoreRepository.findAndCount({
+        where: { studentId: scoreOfStudentDto.studentId },
+      });
       return rs;
     } catch (error) {
       throw error;

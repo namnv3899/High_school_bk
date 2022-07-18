@@ -73,6 +73,17 @@ export class StudentsService {
     }
   }
 
+  public async getAllStudentInClass(filter: any) {
+    try {
+      const rs = await this.studentRepository.findOne({
+        where: { classId: filter.classId },
+      });
+      return rs;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   public async findOneStudent(filter: any) {
     const { id, username, email } = filter;
     try {

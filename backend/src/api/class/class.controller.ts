@@ -30,6 +30,7 @@ import {
   updateClassTeacher,
   UpdateClassTeacherDto,
   UpdateTimetableDto,
+  ListClassOfTeacherDto,
 } from './class.dto';
 
 @ApiTags('Class')
@@ -51,6 +52,8 @@ export class ClassController {
     }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Post('timetable')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -63,6 +66,8 @@ export class ClassController {
     }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Patch('timetable/:classId')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -99,6 +104,27 @@ export class ClassController {
     }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get('listClassOfTeacher/:teacherId')
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async listClassOfTeacher(
+    @Param() listClassOfTeacherDto: ListClassOfTeacherDto,
+    @Res() res,
+  ) {
+    try {
+      const data = await this.classService.listClassOfTeacher(
+        listClassOfTeacherDto,
+      );
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Post('assignClassTeacher')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -116,6 +142,8 @@ export class ClassController {
     }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Patch('assignClassTeacher/:classId')
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })

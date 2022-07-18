@@ -222,6 +222,11 @@ export class AssignClassTeacherDto {
   };
 }
 
+export class ListClassOfTeacherDto {
+  @ApiProperty()
+  teacherId: number;
+}
+
 export class UpdateClassTeacherDto {
   @ApiProperty({
     example: {

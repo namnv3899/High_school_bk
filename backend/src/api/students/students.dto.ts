@@ -67,6 +67,10 @@ export class UpdateStudentParam {
   id: number;
 }
 
+export class StudentInClassDto {
+  @ApiProperty()
+  classId: number;
+}
 export class GetOneStudentdto {
   @ApiProperty()
   id: number;
