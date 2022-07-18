@@ -10,6 +10,7 @@ import {
   AssignClassTeacherDto,
   TimetableDto,
   GetClassTeacherDto,
+  ListClassOfTeacherDto,
   // UpdateTimetableParam,
 } from './class.dto';
 import { Subject } from '../students/students.entity';
@@ -69,6 +70,17 @@ export class ClassService {
     } catch (error) {
       throw error;
     }
+  }
+
+  public async listClassOfTeacher(data: ListClassOfTeacherDto) {
+    const { teacherId } = data;
+    const rs = await this.classroomRepository
+      .createQueryBuilder('classroom')
+      .innerJoin('classroom.classTeachers', 'classTeachers')
+      .innerJoin('classTeachers.teacher', 'teacher')
+      .where('teacher.id=:teacherId', { teacherId })
+      .getMany();
+    return rs;
   }
 
   public async getTimetable(data: any) {

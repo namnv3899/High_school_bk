@@ -19,6 +19,9 @@ import {
   GetScoreDto,
   DeleteScoreDto,
   UpdateScoreDtoParam,
+  ScoreOfStudentDto,
+  ScoreOfSubjectDto,
+  ScoreOfClassOfTeacherPrimary,
 } from './scores.dto';
 import { ScoreService } from './scores.service';
 
@@ -70,6 +73,63 @@ export class ScoreController {
   public async getScore(@Query() getScoreDto: GetScoreDto, @Res() res) {
     try {
       const data = await this.scoreService.getScore(getScoreDto);
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/listScoreOfStudent/:studentId')
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async listScoreOfStudent(
+    @Query() scoreOfStudentDto: ScoreOfStudentDto,
+    @Res() res,
+  ) {
+    try {
+      const data = await this.scoreService.listScoreOfStudent(
+        scoreOfStudentDto,
+      );
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/listScoreOfOneSubject')
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async listScoreOfOneSubject(
+    @Query() scoreOfSubjectDto: ScoreOfSubjectDto,
+    @Res() res,
+  ) {
+    try {
+      const data = await this.scoreService.listScoreOfOneSubject(
+        scoreOfSubjectDto,
+      );
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/listScoreOfClassOfTeacherPrimary')
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async listScoreOfClassOfTeacherPrimary(
+    @Query() scoreOfClassOfTeacherPrimary: ScoreOfClassOfTeacherPrimary,
+    @Res() res,
+  ) {
+    try {
+      const data = await this.scoreService.listScoreOfClassOfTeacherPrimary(
+        scoreOfClassOfTeacherPrimary,
+      );
       res.json({ data });
     } catch (error) {
       throw error;

@@ -88,7 +88,7 @@ export class Student {
   @OneToMany(() => StudentSubject, (studentSubjects) => studentSubjects.student)
   studentSubjects: StudentSubject[];
 
-  @ManyToOne(() => Classroom, (classroom) => classroom.students)
+  @ManyToOne(() => Classroom, (classroom) => classroom.student)
   classroom: Classroom;
 }
 
