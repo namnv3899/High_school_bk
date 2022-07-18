@@ -18,7 +18,6 @@ export class TeacherService {
 
   public async createTeacher(teacherRegisterdto: TeacherRegisterdto) {
     console.log('teacherRegisterdto:', teacherRegisterdto);
-    
     try {
       const teacher = new Teacher();
       teacher.password = bcrypt.hashSync(`$teacherRegisterdto.password}`, 10);
@@ -36,7 +35,7 @@ export class TeacherService {
 
       const rs = await this.teacherRepository.save(teacher);
       console.log('rs:', rs);
-      
+
       return rs;
     } catch (error) {
       throw error;
@@ -86,6 +85,7 @@ export class TeacherService {
       teacher.address = updateTeacherdto.address;
       teacher.username = updateTeacherdto.username;
       teacher.email = updateTeacherdto.email;
+      teacher.password = updateTeacherdto.password;
       teacher.salary = updateTeacherdto.salary;
       teacher.subject = updateTeacherdto.subject;
       teacher.dateOfBirth = updateTeacherdto.dateOfBirth;

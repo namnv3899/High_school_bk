@@ -61,8 +61,23 @@ export class ClassSubject {
   @Column()
   lesson: number;
 
-  @Column()
-  dayOfWeek: string;
+  @Column({ nullable: true })
+  monday: string;
+
+  @Column({ nullable: true })
+  tuesday: string;
+
+  @Column({ nullable: true })
+  wednesday: string;
+
+  @Column({ nullable: true })
+  thursday: string;
+
+  @Column({ nullable: true })
+  friday: string;
+
+  @Column({ nullable: true })
+  saturday: string;
 
   @Column({ nullable: true })
   schoolYear: number;
@@ -90,9 +105,6 @@ export class ClassTeacher {
 
   @Column()
   subject: string;
-
-  @Column()
-  primary: boolean;
 
   @Column({ nullable: true })
   semester: number;

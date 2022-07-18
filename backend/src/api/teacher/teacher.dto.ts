@@ -54,6 +54,9 @@ export class UpdateTeacherdto {
   @ApiProperty()
   dateOfBirth: Date;
 
+  @ApiProperty({ example: 'nam234' })
+  password: string;
+
   @ApiProperty()
   address: string;
 
