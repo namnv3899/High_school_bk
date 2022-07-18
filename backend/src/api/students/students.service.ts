@@ -118,6 +118,7 @@ export class StudentsService {
       student.motherName = updateStudentdto.motherName;
       student.motherJob = updateStudentdto.motherJob;
       student.motherDateOfBirth = updateStudentdto.motherDateOfBirth;
+      student.motherJobAddress = updateStudentdto.motherJobAddress;
       student.motherPhone = updateStudentdto.motherPhone;
       const rs = await this.studentRepository.save(student);
       return rs;
