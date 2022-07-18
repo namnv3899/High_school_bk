@@ -102,6 +102,7 @@ export class StudentsService {
       const student = await this.studentRepository.findOne({ where: { id } });
       student.email = email;
       student.username = username;
+      student.name = updateStudentdto.name;
       student.sex = updateStudentdto.sex;
       student.password = updateStudentdto.password;
       student.dateOfBirth = updateStudentdto.dateOfBirth;
@@ -117,6 +118,7 @@ export class StudentsService {
       student.motherName = updateStudentdto.motherName;
       student.motherJob = updateStudentdto.motherJob;
       student.motherDateOfBirth = updateStudentdto.motherDateOfBirth;
+      student.motherJobAddress = updateStudentdto.motherJobAddress;
       student.motherPhone = updateStudentdto.motherPhone;
       const rs = await this.studentRepository.save(student);
       return rs;
