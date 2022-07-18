@@ -19,25 +19,25 @@ export class StudentSubject {
   @Column()
   subject: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'float' })
   score15m1: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'float' })
   score15m2: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'float' })
   score15m3: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'float' })
   score45m1: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'float' })
   score45m2: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'float' })
   score90m: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'float' })
   averageScore: number;
 
   @Column()
