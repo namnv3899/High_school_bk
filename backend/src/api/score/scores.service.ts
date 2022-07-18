@@ -113,9 +113,11 @@ export class ScoreService {
         .innerJoinAndSelect('studentSubjects.student', 'student')
         .innerJoin('student.classroom', 'classroom')
         .innerJoin('classroom.classTeachers', 'classTeachers')
+        .select('studentSubjects.averageScore')
+        .addSelect('studentSubjects.subject')
+        .addSelect('student.name')
         .where('classroom.id=:classId', { classId })
         .andWhere('classTeachers.subject=:subject', { subject })
-        .orderBy('student.name', 'ASC')
         .getMany();
       console.log('rs:', rs);
       return rs;
