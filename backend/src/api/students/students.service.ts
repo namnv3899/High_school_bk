@@ -75,7 +75,7 @@ export class StudentsService {
 
   public async getAllStudentInClass(filter: any) {
     try {
-      const rs = await this.studentRepository.findOne({
+      const rs = await this.studentRepository.findAndCount({
         where: { classId: filter.classId },
       });
       return rs;
