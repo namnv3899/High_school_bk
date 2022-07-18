@@ -102,6 +102,7 @@ export class StudentsService {
       const student = await this.studentRepository.findOne({ where: { id } });
       student.email = email;
       student.username = username;
+      student.name = updateStudentdto.name;
       student.sex = updateStudentdto.sex;
       student.password = updateStudentdto.password;
       student.dateOfBirth = updateStudentdto.dateOfBirth;
