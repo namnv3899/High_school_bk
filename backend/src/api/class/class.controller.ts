@@ -31,6 +31,7 @@ import {
   UpdateClassTeacherDto,
   UpdateTimetableDto,
   ListClassOfTeacherDto,
+  GetTimetableOfTeacherDto,
 } from './class.dto';
 
 @ApiTags('Class')
@@ -98,6 +99,25 @@ export class ClassController {
   ) {
     try {
       const data = await this.classService.getTimetable(getTimetableDto);
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get('timetableOfTeacher')
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async getTimetableOfTeacher(
+    @Query() getTimetableOfTeacherDto: GetTimetableOfTeacherDto,
+    @Res() res,
+  ) {
+    try {
+      const data = await this.classService.getTimetableOfTeacher(
+        getTimetableOfTeacherDto,
+      );
       res.json({ data });
     } catch (error) {
       throw error;
@@ -230,7 +250,7 @@ export class ClassController {
     try {
       const data = await this.classService.updateClass({
         ...updateClassdto,
-        paramss,
+        ...paramss,
       });
 
       res.json({ data });

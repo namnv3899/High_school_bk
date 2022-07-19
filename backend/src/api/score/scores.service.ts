@@ -60,22 +60,24 @@ export class ScoreService {
 
   public async updateScore(updateScoreDto: any) {
     try {
+      console.log('updateScoreDto:', updateScoreDto.id);
       const score = await this.scoreRepository.findOne({
         where: { id: updateScoreDto.id },
       });
-
+      console.log('score1', score);
       if (score.endTimeCalculationScore < Math.floor(new Date().getTime())) {
         throw new BadRequestException('Time over to enter score');
       }
 
-      score.score15m1 = updateScoreDto.score15m1;
-      score.score15m2 = updateScoreDto.score15m2;
-      score.score15m3 = updateScoreDto.score15m3;
-      score.score45m1 = updateScoreDto.score45m1;
-      score.score45m2 = updateScoreDto.score45m2;
-      score.score90m = updateScoreDto.score90m;
+      score.score15m1 = Number(updateScoreDto.score15m1);
+      score.score15m2 = Number(updateScoreDto.score15m2);
+      score.score15m3 = Number(updateScoreDto.score15m3);
+      score.score45m1 = Number(updateScoreDto.score45m1);
+      score.score45m2 = Number(updateScoreDto.score45m2);
+      score.score90m = Number(updateScoreDto.score90m);
 
       const rs = await this.scoreRepository.save(score);
+      console.log('score2', rs);
       return rs;
     } catch (error) {
       throw error;
@@ -162,7 +164,7 @@ export class ScoreService {
       //   throw new BadRequestException('timeover to calculation score');
       // }
 
-      const rs =
+      const averageScoreScore =
         (score.score15m1 +
           score.score15m2 +
           score.score15m3 +
@@ -170,6 +172,15 @@ export class ScoreService {
           score.score45m2 * 2 +
           score.score90m * 3) /
         10;
+      score.averageScore = averageScoreScore;
+      const rs = await this.scoreRepository.save(score);
+
+      // const rs = await this.scoreRepository
+      //   .createQueryBuilder()
+      //   .update(StudentSubject)
+      //   .set({ averageScore: averageScoreScore })
+      //   .where('id = :id', { id: averageScoreDto.id })
+      //   .execute();
       return rs;
     } catch (error) {
       throw error;
