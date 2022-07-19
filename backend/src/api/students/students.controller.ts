@@ -38,7 +38,7 @@ export class StudentsController {
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   public async createStudent(
-    @Query() studentRegisterdto: StudentRegisterdto,
+    @Body() studentRegisterdto: StudentRegisterdto,
     @Res() res,
   ) {
     try {
