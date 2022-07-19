@@ -28,7 +28,7 @@ export class ClassService {
     @InjectRepository(Subject)
     private readonly SubjectRepository: Repository<Subject>,
     private readonly teacherService: TeacherService,
-  ) {}
+  ) { }
 
   public async createClass(createClassdto: CreateClassdto) {
     try {
@@ -81,6 +81,14 @@ export class ClassService {
       .where('teacher.id=:teacherId', { teacherId })
       .getMany();
     return rs;
+  }
+
+  public async getTimetableOfTeacher(data: any) {
+    const { classId } = data;
+    const classTeacher = await this.classSubjectRepository.find({
+      where: [{ monday: 'Ngữ văn' }, {}, {}, {}, {}],
+    });
+    return classTeacher;
   }
 
   public async getTimetable(data: any) {

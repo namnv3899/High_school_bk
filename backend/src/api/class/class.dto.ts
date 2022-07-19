@@ -58,22 +58,22 @@ export class TimetableDto {
   @ApiProperty()
   lesson: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Ngữ văn' })
   monday: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Toán học' })
   tuesday: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Vật lý' })
   wednesday: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Hóa học' })
   thursday: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Toán học' })
   friday: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Ngữ văn' })
   saturday: string;
 }
 
@@ -220,6 +220,11 @@ export class AssignClassTeacherDto {
     teacherId: number;
     classId: number;
   };
+}
+
+export class GetTimetableOfTeacherDto {
+  @ApiProperty({ example: 'Ngữ văn' })
+  subject: string;
 }
 
 export class ListClassOfTeacherDto {

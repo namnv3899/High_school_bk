@@ -61,12 +61,10 @@ export class ScoreService {
   public async updateScore(updateScoreDto: any) {
     try {
       console.log('updateScoreDto:', updateScoreDto.id);
-      
       const score = await this.scoreRepository.findOne({
         where: { id: updateScoreDto.id },
       });
       console.log('score1', score);
-      
       if (score.endTimeCalculationScore < Math.floor(new Date().getTime())) {
         throw new BadRequestException('Time over to enter score');
       }
