@@ -406,6 +406,11 @@ export class GetOneClassdto {
   id: number;
 }
 
+export class classPrimaryOfTeacher {
+  @ApiProperty({ example: 1 })
+  teacherId: string;
+}
+
 export class SearchClassdto {
   @ApiProperty({ example: '11A2', nullable: true })
   name: string;

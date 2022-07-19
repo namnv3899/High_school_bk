@@ -32,6 +32,7 @@ import {
   UpdateTimetableDto,
   ListClassOfTeacherDto,
   GetTimetableOfTeacherDto,
+  classPrimaryOfTeacher,
 } from './class.dto';
 
 @ApiTags('Class')
@@ -209,6 +210,32 @@ export class ClassController {
   public async findAll(@Query() searchClassdto: SearchClassdto, @Res() res) {
     try {
       const data = await this.classService.searchClass(searchClassdto);
+      res.json({ data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get('classPrimaryOfTeacher/:teacherId')
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 404, description: 'Not found' })
+  @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  public async classPrimaryOfTeacher(
+    @Param() getOneClassdto: classPrimaryOfTeacher,
+    @Res() res,
+  ) {
+    try {
+      const data = await this.classService.classPrimaryOfTeacher(
+        getOneClassdto,
+      );
+
+      if (!data) {
+        throw new HttpException('Class is not found', HttpStatus.NOT_FOUND);
+      }
+
       res.json({ data });
     } catch (error) {
       throw error;

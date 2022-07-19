@@ -11,6 +11,7 @@ import {
   TimetableDto,
   GetClassTeacherDto,
   ListClassOfTeacherDto,
+  classPrimaryOfTeacher,
   // UpdateTimetableParam,
 } from './class.dto';
 import { Subject } from '../students/students.entity';
@@ -28,7 +29,7 @@ export class ClassService {
     @InjectRepository(Subject)
     private readonly SubjectRepository: Repository<Subject>,
     private readonly teacherService: TeacherService,
-  ) { }
+  ) {}
 
   public async createClass(createClassdto: CreateClassdto) {
     try {
@@ -194,6 +195,21 @@ export class ClassService {
     }
   }
 
+  public async classPrimaryOfTeacher(getOneClassdto: classPrimaryOfTeacher) {
+    const { teacherId } = getOneClassdto;
+    try {
+      const rs = await this.classroomRepository
+        .createQueryBuilder('classroom')
+        .innerJoin('classroom.classTeachers', 'classTeachers')
+        .innerJoin('classTeachers.teacher', 'teacher')
+        .where('teacher.id=:teacherId', { teacherId })
+        .andWhere('classTeachers.subject=:subject', { subject: 'chuNhiem' })
+        .getOne();
+      return rs;
+    } catch (error) {
+      throw error;
+    }
+  }
   public async findOneClass(getOneClassdto: GetOneClassdto) {
     const { id } = getOneClassdto;
     try {
