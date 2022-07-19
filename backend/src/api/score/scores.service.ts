@@ -154,13 +154,13 @@ export class ScoreService {
         where: { id: averageScoreDto.id },
       });
 
-      if (score.startTimeCalculationScore > Math.floor(new Date().getTime())) {
-        throw new BadRequestException("It's not time to calculation score yet");
-      }
+      // if (score.startTimeCalculationScore > Math.floor(new Date().getTime())) {
+      //   throw new BadRequestException("It's not time to calculation score yet");
+      // }
 
-      if (score.endTimeCalculationScore < Math.floor(new Date().getTime())) {
-        throw new BadRequestException('timeover to calculation score');
-      }
+      // if (score.endTimeCalculationScore < Math.floor(new Date().getTime())) {
+      //   throw new BadRequestException('timeover to calculation score');
+      // }
 
       const rs =
         (score.score15m1 +
