@@ -19,7 +19,7 @@ export class Student {
   @Column()
   classId: number;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
   @Column()
