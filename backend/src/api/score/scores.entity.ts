@@ -40,10 +40,10 @@ export class StudentSubject {
   @Column({ nullable: true, type: 'float' })
   averageScore: number;
 
-  @Column()
+  @Column({ nullable: true })
   schoolYear: number;
 
-  @Column()
+  @Column({ nullable: true })
   semester: number;
 
   @CreateDateColumn({ name: 'Created_At', type: 'timestamp' })
