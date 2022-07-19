@@ -172,6 +172,13 @@ export class ScoreService {
         10;
       score.averageScore = averageScoreScore;
       const rs = await this.scoreRepository.save(score);
+
+      // const rs = await this.scoreRepository
+      //   .createQueryBuilder()
+      //   .update(StudentSubject)
+      //   .set({ averageScore: averageScoreScore })
+      //   .where('id = :id', { id: averageScoreDto.id })
+      //   .execute();
       return rs;
     } catch (error) {
       throw error;
