@@ -57,7 +57,7 @@ export class ScoreController {
     try {
       const data = await this.scoreService.updateScore({
         ...updateScoreDto,
-        param,
+        ...param,
       });
       res.json({ data });
     } catch (error) {
