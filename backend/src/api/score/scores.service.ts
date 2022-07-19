@@ -68,12 +68,12 @@ export class ScoreService {
         throw new BadRequestException('Time over to enter score');
       }
 
-      score.score15m1 = Number(updateScoreDto.score15m1);
-      score.score15m2 = Number(updateScoreDto.score15m2);
-      score.score15m3 = Number(updateScoreDto.score15m3);
-      score.score45m1 = Number(updateScoreDto.score45m1);
-      score.score45m2 = Number(updateScoreDto.score45m2);
-      score.score90m = Number(updateScoreDto.score90m);
+      score.score15m1 = updateScoreDto.score15m1;
+      score.score15m2 = updateScoreDto.score15m2;
+      score.score15m3 = updateScoreDto.score15m3;
+      score.score45m1 = updateScoreDto.score45m1;
+      score.score45m2 = updateScoreDto.score45m2;
+      score.score90m = updateScoreDto.score90m;
 
       const rs = await this.scoreRepository.save(score);
       return rs;
@@ -162,7 +162,7 @@ export class ScoreService {
       //   throw new BadRequestException('timeover to calculation score');
       // }
 
-      const averageScoreScore =
+      const rs =
         (score.score15m1 +
           score.score15m2 +
           score.score15m3 +
@@ -170,8 +170,6 @@ export class ScoreService {
           score.score45m2 * 2 +
           score.score90m * 3) /
         10;
-      score.averageScore = averageScoreScore;
-      const rs = await this.scoreRepository.save(score);
       return rs;
     } catch (error) {
       throw error;
