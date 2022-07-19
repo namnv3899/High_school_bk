@@ -113,11 +113,8 @@ export class ScoreService {
       const rs = await this.scoreRepository
         .createQueryBuilder('studentSubjects')
         .innerJoinAndSelect('studentSubjects.student', 'student')
-        .innerJoin('student.classroom', 'classroom')
+        .innerJoinAndSelect('student.classroom', 'classroom')
         .innerJoin('classroom.classTeachers', 'classTeachers')
-        .select('studentSubjects.averageScore')
-        .addSelect('studentSubjects.subject')
-        .addSelect('student.name')
         .where('classroom.id=:classId', { classId })
         .andWhere('classTeachers.subject=:subject', { subject })
         .getMany();
