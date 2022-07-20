@@ -97,10 +97,14 @@ export class StudentsService {
   }
 
   public async updateStudent(updateStudentdto: any) {
-    const { id, username, email } = updateStudentdto;
+    const { id, username, email, classId } = updateStudentdto;
     try {
+      const classroom = await this.classService.findOneClass({
+        id: classId,
+      });
       const student = await this.studentRepository.findOne({ where: { id } });
       student.email = email;
+      student.classId = classId;
       student.username = username;
       student.name = updateStudentdto.name;
       student.sex = updateStudentdto.sex;
@@ -120,6 +124,7 @@ export class StudentsService {
       student.motherDateOfBirth = updateStudentdto.motherDateOfBirth;
       student.motherJobAddress = updateStudentdto.motherJobAddress;
       student.motherPhone = updateStudentdto.motherPhone;
+      student.classroom = classroom;
       const rs = await this.studentRepository.save(student);
       return rs;
     } catch (error) {
