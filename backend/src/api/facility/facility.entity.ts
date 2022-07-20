@@ -14,7 +14,7 @@ export class Facility {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ type: 'float' })
   price: number;
 
   @Column({ nullable: true })
