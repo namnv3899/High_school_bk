@@ -105,7 +105,7 @@ export class FacilityController {
     try {
       const data = await this.facilityService.updateFacility({
         ...updateFacilitydto,
-        param,
+        ...param,
       });
 
       res.json({ data });
