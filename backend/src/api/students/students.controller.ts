@@ -124,7 +124,7 @@ export class StudentsController {
     try {
       const data = await this.studentsService.updateStudent({
         ...updateStudentdto,
-        param,
+        ...param,
       });
 
       res.json({ data });
