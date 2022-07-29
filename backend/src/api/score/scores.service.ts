@@ -68,13 +68,43 @@ export class ScoreService {
       if (score.endTimeCalculationScore < Math.floor(new Date().getTime())) {
         throw new BadRequestException('Time over to enter score');
       }
+      if (updateScoreDto.score15m1 > 10 || updateScoreDto.score15m1 < 0) {
+        throw new BadRequestException(
+          'Điểm số cần phải lớn hơn 0 và nhỏ hơn 10',
+        );
+      }
+      if (updateScoreDto.score15m2 > 10 || updateScoreDto.score15m2 < 0) {
+        throw new BadRequestException(
+          'Điểm số cần phải lớn hơn 0 và nhỏ hơn 10',
+        );
+      }
+      if (updateScoreDto.score15m3 > 10 || updateScoreDto.score15m3 < 0) {
+        throw new BadRequestException(
+          'Điểm số cần phải lớn hơn 0 và nhỏ hơn 10',
+        );
+      }
+      if (updateScoreDto.score45m1 > 10 || updateScoreDto.score45m1 < 0) {
+        throw new BadRequestException(
+          'Điểm số cần phải lớn hơn 0 và nhỏ hơn 10',
+        );
+      }
+      if (updateScoreDto.score45m2 > 10 || updateScoreDto.score45m2 < 0) {
+        throw new BadRequestException(
+          'Điểm số cần phải lớn hơn 0 và nhỏ hơn 10',
+        );
+      }
+      if (updateScoreDto.score90m > 10 || updateScoreDto.score90m < 0) {
+        throw new BadRequestException(
+          'Điểm số cần phải lớn hơn 0 và nhỏ hơn 10',
+        );
+      }
 
-      score.score15m1 = Number(updateScoreDto.score15m1);
-      score.score15m2 = Number(updateScoreDto.score15m2);
-      score.score15m3 = Number(updateScoreDto.score15m3);
-      score.score45m1 = Number(updateScoreDto.score45m1);
-      score.score45m2 = Number(updateScoreDto.score45m2);
-      score.score90m = Number(updateScoreDto.score90m);
+      score.score15m1 = updateScoreDto.score15m1;
+      score.score15m2 = updateScoreDto.score15m2;
+      score.score15m3 = updateScoreDto.score15m3;
+      score.score45m1 = updateScoreDto.score45m1;
+      score.score45m2 = updateScoreDto.score45m2;
+      score.score90m = updateScoreDto.score90m;
 
       const rs = await this.scoreRepository.save(score);
       console.log('score2', rs);
@@ -152,7 +182,7 @@ export class ScoreService {
       const score = await this.scoreRepository.findOne({
         where: { id: averageScoreDto.id },
       });
-
+      console.log('score:', typeof score.score15m2);
       // if (score.startTimeCalculationScore > Math.floor(new Date().getTime())) {
       //   throw new BadRequestException("It's not time to calculation score yet");
       // }
@@ -160,14 +190,40 @@ export class ScoreService {
       // if (score.endTimeCalculationScore < Math.floor(new Date().getTime())) {
       //   throw new BadRequestException('timeover to calculation score');
       // }
-
+      let score15m1 = score.score15m1;
+      let score15m2 = score.score15m2;
+      let score15m3 = score.score15m3;
+      let score45m1 = score.score45m1;
+      let score45m2 = score.score45m2;
+      let score90m = score.score90m;
+      if (isNaN(score.score15m1)) {
+        score15m1 = 0;
+      }
+      if (isNaN(score15m2)) {
+        score15m2 = 0;
+        console.log('score15m2:', score15m2);
+      }
+      if (isNaN(score15m3)) {
+        score15m3 = 0;
+        console.log('score15m2:', score15m2);
+      }
+      if (isNaN(score45m1)) {
+        score45m1 = 0;
+      }
+      if (isNaN(score45m2)) {
+        score45m2 = 0;
+      }
+      if (isNaN(score90m)) {
+        score90m = 0;
+      }
+      console.log('score15m1:', score15m2);
       const averageScoreScore =
-        (score.score15m1 +
-          score.score15m2 +
-          score.score15m3 +
-          score.score45m1 * 2 +
-          score.score45m2 * 2 +
-          score.score90m * 3) /
+        (score15m1 +
+          score15m2 +
+          score15m3 +
+          score45m1 * 2 +
+          score45m2 * 2 +
+          score90m * 3) /
         10;
       score.averageScore = averageScoreScore;
       console.log('averageScoreScore:', averageScoreScore);
