@@ -1,0 +1,62 @@
+export const TeacherList = [
+    {
+        id : 1,
+        name : "Vũ Hoàng Phúc",
+        birthday : "15/10/2000",
+        sex : "Nam",
+        email: "vuhoangphuc2000@gmail.com",
+        phone : "0382431592",
+        address : "Trang Liệt, Trang Hạ, Từ Sơn, Bắc Ninh",
+        startWorking : "3/7/2022",
+        endWorking : "",
+        subject: "Toán học",
+        username : "phucvh",
+        password : "phucvh",
+        salary : "20M"
+    },
+    {
+        id : 2,
+        name : "Vũ Thị Nhung",
+        birthday : "15/09/1997",
+        sex : "Nữ",
+        email: "nhungvu@gmail.com",
+        phone : "0352112545",
+        address : "Trang Liệt, Trang Hạ, Từ Sơn, Bắc Ninh",
+        startWorking : "3/7/2022",
+        endWorking : "",
+        subject: "Sinh học",
+        username : "nhungvt",
+        password : "nhungvt",
+        salary : "30M"
+    },
+    {
+        id : 3,
+        name : "Vũ Phương Huyền",
+        birthday : "19/02/2009",
+        sex : "Nữ",
+        email: "huyenvu@gmail.com",
+        phone : "0383518565",
+        address : "Trang Liệt, Trang Hạ, Từ Sơn, Bắc Ninh",
+        startWorking : "3/7/2022",
+        endWorking : "",
+        subject: "Văn học",
+        username : "huyenvt",
+        password : "huyenvt",
+        salary : "10M"
+    },
+    {
+        id : 4,
+        name : "Nguyễn Văn Nam",
+        birthday : "19/07/2000",
+        sex : "Nam",
+        email: "namnv@gmail.com",
+        phone : "0352146797",
+        address : "Hà Nội",
+        startWorking : "3/7/2022",
+        endWorking : "",
+        subject: "Ngoại ngữ",
+        username : "namnv",
+        password : "namnv",
+        salary : "50M"
+    }
+]

@@ -1,0 +1,53 @@
+export const ClassScore = [
+    {
+        id : 1,
+        name : "Vũ Hoàng Phúc",
+        birthday : "15/10/2000",
+        math: "9.0",
+        physics : "7.5",
+        chemistry : "9.2",
+        biology : "8.4",
+        it : "9.4",
+        liturature : "8.4",
+        history : "8.7",
+        geography : "8.2",
+        english : "8.0",
+        civic : "8.9",
+        science : "8.6",
+        avg : "8.6"
+    },
+    {
+        id : 2,
+        name : "Phan Thế Anh",
+        birthday : "26/10/2000",
+        math: "9.3",
+        physics : "6.6",
+        chemistry : "9.6",
+        biology : "9.2",
+        it : "9.3",
+        liturature : "8.2",
+        history : "8.7",
+        geography : "8.1",
+        english : "7.7",
+        civic : "9.1",
+        science : "8.5",
+        avg : "8.5"
+    },
+    {
+        id : 3,
+        name : "Hoàng Kim Chi",
+        birthday : "12/12/2000",
+        math: "8.4",
+        physics : "7.9",
+        chemistry : "8.9",
+        biology : "8.9",
+        it : "9.3",
+        liturature : "8.4",
+        history : "8.8",
+        geography : "8.1",
+        english : "8.7",
+        civic : "9.3",
+        science : "8.7",
+        avg : "8.7"
+    }
+]
