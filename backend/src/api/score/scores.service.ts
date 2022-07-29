@@ -170,6 +170,8 @@ export class ScoreService {
           score.score90m * 3) /
         10;
       score.averageScore = averageScoreScore;
+      console.log('averageScoreScore:', averageScoreScore);
+
       const rs = await this.scoreRepository.save(score);
 
       // const rs = await this.scoreRepository
