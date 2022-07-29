@@ -85,7 +85,6 @@ export class UpdateScoreDto {
   score90m: number;
 
   @ApiProperty()
-  @Max(2022)
   schoolYear: number;
 
   @ApiProperty()
