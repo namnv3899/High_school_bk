@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Max, Min } from 'class-validator';
+import { Max } from 'class-validator';
 
 export class CreateScoreDto {
   @ApiProperty()
@@ -61,37 +61,30 @@ export class ScoreOfClassOfTeacherPrimary {
 
 export class UpdateScoreDto {
   @ApiProperty()
-  @Min(0)
   @Max(10)
   score15m1: number;
 
   @ApiProperty()
-  @Min(0)
   @Max(10)
   score15m2: number;
 
   @ApiProperty()
-  @Min(0)
   @Max(10)
   score15m3: number;
 
   @ApiProperty()
-  @Min(0)
   @Max(10)
   score45m1: number;
 
   @ApiProperty()
-  @Min(0)
   @Max(10)
   score45m2: number;
 
   @ApiProperty()
-  @Min(0)
   @Max(10)
   score90m: number;
 
   @ApiProperty()
-  @Min(0)
   @Max(2022)
   schoolYear: number;
 
